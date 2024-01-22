@@ -1,6 +1,7 @@
 // Header.jsx
 import React from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa"; // Import icons from React Icons library
+import { Link } from "react-router-dom";
 import "../styles/header.css";
 
 const Header = () => {
@@ -24,7 +25,9 @@ const Header = () => {
           {/* Replace with your actual logo path */}
         </div>
         <div className="user-icons">
-          <FaUser className="icon" />
+          <Link to="/login">
+            <FaUser className="icon" />
+          </Link>
           <FaShoppingCart className="icon" />
           {/* Add more icons or components as needed */}
         </div>
