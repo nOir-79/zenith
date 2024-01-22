@@ -1,0 +1,35 @@
+/* styles.css (or styles.scss, styles.less, etc.) */
+
+.category-bar {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 0;
+  background-color: #222; /* Background color for the category bar */
+  color: #fff;
+}
+.category-bar::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+.category-bar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.category-container {
+  display: flex;
+  padding: 0 10px;
+}
+
+.category-link {
+  padding: 8px 15px;
+  color: #ecf0f1; /* Text color for category links */
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.category-link:hover {
+  background-color: #2c3e50; /* Background color on hover */
+}

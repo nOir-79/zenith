@@ -1,0 +1,40 @@
+/* styles.css (or styles.scss, styles.less, etc.) */
+
+.subcategories-window {
+  position: fixed;
+  top: 116px;
+  left: 0px;
+  width: 98%;
+  height: 50%;
+  background-color: #fff;
+  border: 2px solid #222;
+  padding: 20px;
+  color: black;
+}
+
+.category-link {
+  position: relative;
+}
+
+.window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.subcategories-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.subcategory-link {
+  padding: 8px 0;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.subcategory-link:hover {
+  color: #007bff;
+}
