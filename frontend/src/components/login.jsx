@@ -1,7 +1,7 @@
 // LoginPage.jsx
 
 import React, { useState } from "react";
-import "./LoginPage.css"; // Import the corresponding CSS file
+import "../styles/login.css"; // Import the corresponding CSS file
 
 const LoginPage = () => {
   const [isShopLogin, setIsShopLogin] = useState(false);
