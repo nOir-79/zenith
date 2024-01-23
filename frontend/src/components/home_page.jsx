@@ -3,7 +3,8 @@ import "../styles/home_page.css";
 import CategoryBar from "./category_bar.jsx";
 import Header from "./header.jsx";
 function HomePage(user) {
-  const isUserPage = user;
+  console.log("User:", user);
+  const isUserPage = user["user"];
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState({});
 
