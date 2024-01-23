@@ -24,11 +24,11 @@ const CategoryBar = ({ categories, subcategories }) => {
           <div
             key={index}
             className="category-link"
-            onMouseEnter={() => handleCategoryHover(category)}
+            onMouseEnter={() => handleCategoryHover(category.toLowerCase())}
             onMouseLeave={handleCategoryLeave}
           >
             {category}
-            {selectedCategory == category && (
+            {selectedCategory == category.toLowerCase() && (
               <SubcategoriesWindow
                 category={selectedCategory}
                 subcategories={subcategories[selectedCategory] || []}

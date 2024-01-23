@@ -1,33 +1,45 @@
+import React, { useEffect, useState } from "react";
 import "../styles/home_page.css";
 import CategoryBar from "./category_bar.jsx";
 import Header from "./header.jsx";
-function HomePage() {
-  const categories = [
-    "Category 1",
-    "Category 2",
-    "Category 3",
-    "Category 4",
-    "Category 5",
-    "Category 1",
-    "Category 2",
-    "Category 3",
-    "Category 4",
-    "Category 5",
-    "Category 1",
-    "Category 2",
-    "Category 3",
-    "Category 4",
-    "Category 5",
-  ];
-  const subcategories = {
-    "Category 1": ["Subcategory 1.1", "Subcategory 1.2", "Subcategory 1.3"],
-    "Category 2": ["Subcategory 2.1", "Subcategory 2.2", "Subcategory 2.3"],
-    // Add subcategories for other categories
-  };
+function HomePage(user) {
+  const isUserPage = user;
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/");
+        const data = await response.json();
+        const category = data.map((item) => item.key);
+        const subcategory = data.flatMap((item) =>
+          item.value.map((subItem) => subItem.cat)
+        );
+        const categoryMap = {};
+
+        data.forEach((item) => {
+          const category = item.key.toLowerCase();
+          const subcategories = item.value.map((subItem) =>
+            subItem.cat.toLowerCase()
+          );
+          categoryMap[category] = subcategories;
+        });
+        console.log("Category:", category);
+        console.log("Subcategory:", subcategory);
+        console.log("Category Map:", categoryMap);
+        setCategories(category);
+        setSubcategories(categoryMap);
+      } catch (error) {
+        console.error("Error fetching categories: ", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <div>
-        <Header />
+        {isUserPage ? <Header userPage={true} /> : <Header userPage={false} />}
         <CategoryBar categories={categories} subcategories={subcategories} />
       </div>
     </>

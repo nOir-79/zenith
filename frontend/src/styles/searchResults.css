@@ -1,0 +1,30 @@
+/* search-results.css */
+
+.search-results-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 250px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
+.product-details {
+  text-align: center;
+}
+
+/* Add additional styling as needed */

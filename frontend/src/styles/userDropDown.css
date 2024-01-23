@@ -1,0 +1,35 @@
+/* UserIconDialog.css */
+.user-icon-dialog {
+  position: absolute;
+  top: 40px; /* Adjust the positioning based on your layout */
+  right: 10px; /* Adjust the positioning based on your layout */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.user-icon-dialog ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-icon-dialog li {
+  margin-bottom: 10px;
+}
+
+.user-icon-dialog a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  padding: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.user-icon-dialog a:hover {
+  background-color: #f0f0f0;
+}
