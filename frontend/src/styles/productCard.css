@@ -38,15 +38,6 @@
   user-select: none;
 }
 
-.product-detail p {
-  font-size: 1 rem;
-  display: flex;
-  flex-wrap: wrap;
-  color: #fff;
-  margin-top: 5px;
-  text-align: center;
-}
-
 .buttons {
   height: 20px;
   margin-top: 8px;
