@@ -1,12 +1,11 @@
-// Header.jsx
 import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/header.css";
+// import "../styles/header.css";
 import UserDropDown from "./userDropDown";
+
 const Header = ({ userPage }) => {
-  // const dispatch = useDispatch();
   const [isUserIconHovered, setIsUserIconHovered] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -14,6 +13,7 @@ const Header = ({ userPage }) => {
   const handleUserIconHover = () => {
     setIsUserIconHovered((prevIsUserIconHovered) => !prevIsUserIconHovered);
   };
+
   const handleSearch = async () => {
     try {
       console.log("Search term:", searchTerm);
@@ -53,39 +53,51 @@ const Header = ({ userPage }) => {
 
   return (
     <>
-      <header className="ecommerce-header">
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="What can we help you to find?"
-            className="search-input"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <FaSearch className="search-icon" onClick={handleSearch} />
-        </div>
-        <div className="logo">
-          <img
-            src="/path/to/logo.png"
-            alt="E-commerce Logo"
-            className="logo-image"
-          />
-        </div>
-        {!userPage && (
-          <div className="user-icons">
-            <Link to="/login">
-              <FaUser className="icon" />
-            </Link>
-            <FaShoppingCart className="icon" />
+      <header className="bg-gray-800 p-4 text-white">
+        <div className="flex items-center">
+          <div className="flex-1">
+            <div className="search-bar flex items-center">
+              <input
+                type="text"
+                placeholder="What can we help you to find?"
+                className="search-input p-2 rounded-l-lg text-gray-950"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button
+                className="search-icon bg-blue-500 text-white p-2 rounded-r-lg"
+                onClick={handleSearch}
+              >
+                <FaSearch />
+              </button>
+            </div>
           </div>
-        )}
-        {userPage && (
-          <div className="user-icons">
-            <CiUser className="icon user" onMouseEnter={handleUserIconHover} />
-            <FaShoppingCart className="icon" />
+
+          <div className="logo">
+            <img
+              src="/path/to/logo.png"
+              alt="E-commerce Logo"
+              className="logo-image"
+            />
           </div>
-        )}
-        {isUserIconHovered && <UserDropDown hovered={isUserIconHovered} />}
+
+          <div className="user-icons flex items-center space-x-4">
+            {!userPage && (
+              <Link to="/login">
+                <FaUser className="icon" />
+              </Link>
+            )}
+            <FaShoppingCart className="icon" />
+            {userPage && (
+              <CiUser
+                className="icon user"
+                onMouseEnter={handleUserIconHover}
+              />
+            )}
+          </div>
+
+          {isUserIconHovered && <UserDropDown hovered={isUserIconHovered} />}
+        </div>
       </header>
     </>
   );

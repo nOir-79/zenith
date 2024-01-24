@@ -8,6 +8,9 @@ import SubcategoriesWindow from "./subcategories_window.jsx";
 const CategoryBar = ({ categories, subcategories }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
+  for (let i = 0; i < 10; i++) {
+    categories.push("Category");
+  }
 
   const handleCategoryHover = (category) => {
     setSelectedCategory(category.toLowerCase());
