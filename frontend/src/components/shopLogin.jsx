@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "../styles/login.css";
+import "../styles/shopLogin.css";
 function login() {
-  const [formData, setFormData] = useState({ phone_number: "", password: "" });
+  const [formData, setFormData] = useState({ license_no: "", password: "" });
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -15,21 +15,19 @@ function login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("here");
 
     try {
-      const response = await fetch("http://localhost:3000/customerlogin", {
+      const response = await fetch("http://localhost/3000/shoplogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      console.log("Here");
 
       if (response.ok) {
-        // Redirect to a new page upon successful login
         console.log("login successful");
+        // Redirect to a new page upon successful login
         navigate("/");
       } else {
         // Handle unsuccessful login (show error message, etc.)
@@ -39,16 +37,13 @@ function login() {
       console.error("Error during login:", error);
     }
   };
-  const handleShopLogin = () => {
-    navigate("/shopLogin");
-  };
 
   return (
-    <div className="login-body">
+    <div className="shop-body">
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
-          <form className="signup-form">
+          <form className="signup-form" onSubmit={handleLogin}>
             <label htmlFor="chk" aria-hidden="true">
               Sign up
             </label>
@@ -56,14 +51,14 @@ function login() {
               className="input"
               type="text"
               name="txt"
-              placeholder="User name"
+              placeholder="Shop Name"
               required=""
             />
             <input
               className="input"
-              type="email"
-              name="email"
-              placeholder="Email"
+              type="text"
+              name="license_no"
+              placeholder="License NO"
               required=""
             />
             <input
@@ -73,23 +68,21 @@ function login() {
               placeholder="Password"
               required=""
             />
-            <button className="button" type="submit">
-              Sign up
-            </button>
+            <button className="button">Sign up</button>
           </form>
         </div>
         <div className="login">
-          <form onSubmit={handleLogin}>
+          <form>
             <label htmlFor="chk" aria-hidden="true">
               Login
             </label>
             <input
               className="input"
               type="text"
-              name="phone_number"
-              id="phone_number"
-              placeholder="Phone Number"
-              value={formData.phone_number}
+              name="license_no"
+              id="license_no"
+              placeholder="Email"
+              value={formData.license_no}
               onChange={handleChange}
             />
             <input
@@ -101,15 +94,10 @@ function login() {
               value={formData.password}
               onChange={handleChange}
             />
-            <button className="button" type="submit">
-              Login
-            </button>
+            <button className="button">Login</button>
           </form>
         </div>
       </div>
-      <button onClick={handleShopLogin} className="shopLogin">
-        login as shop
-      </button>
     </div>
   );
 }

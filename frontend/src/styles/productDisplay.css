@@ -1,8 +1,10 @@
 .product-display {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 60px;
+  gap: 20px;
+  padding: 10px 20px 40px 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Add any additional styling for the product display page as needed */

@@ -1,21 +1,29 @@
-// SubcategoriesWindow.jsx
+// SubcategoriesWindow.js
 
 import React from "react";
-import "../styles/subcategories_window.css";
 
-const SubcategoriesWindow = ({ category, subcategories, onClose }) => {
+const SubcategoriesWindow = ({
+  category,
+  subcategories,
+  onSubcategoryClick,
+  onClose,
+}) => {
   return (
     <div className="subcategories-window">
-      <div className="window-header">
-        <h2>{category} Subcategories</h2>
-      </div>
-      <div className="subcategories-list">
+      <div className="subcategories-container">
         {subcategories.map((subcategory, index) => (
-          <a href={`#${subcategory}`} key={index} className="subcategory-link">
+          <div
+            key={index}
+            className="subcategory-link"
+            onClick={() => onSubcategoryClick(subcategory)}
+          >
             {subcategory}
-          </a>
+          </div>
         ))}
       </div>
+      <button onClick={onClose} className="close-button">
+        Close
+      </button>
     </div>
   );
 };
