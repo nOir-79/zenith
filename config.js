@@ -3,7 +3,7 @@ const dbConfig = {
     password: '1234',
     host: 'localhost',
     port: 5432,
-    database: 'e_commerce',
+    database: 'zenith',
 };
 
 module.exports = dbConfig;

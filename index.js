@@ -6,25 +6,51 @@ const exp = require('express');
 const cors=require('cors');
 const bodyParser = require('body-parser');
 const { as } = require('pg-promise');
+var bcrypt = require('bcryptjs');
+
+
 
 router.use(express.urlencoded({ extended: true }));
 
 async function db_query(query,params) {
-    let res=db.query(query)
+    let res=await db.query(query,params)
     .then((result) => {
+       console.log(":Checking result in db_quesry");
        //console.log( result);
        return result;
     });
+    console.log("Checkiing response");
+    //console.log(res);
     return res;
 }
 
-// router.get('/shop',async(req,res)=>{
-//   const query="SELECT * FROM SHOP";
-//   const params=[];
-//   const result=await db_query(query,params);
-//   console.log("we are here");
-//   res.status(200).json(result);
-// });
+router.get('/shop',async(req,res)=>{
+  const query="SELECT * FROM customer";
+  const params=[];
+  const result=await db_query(query,params);
+  console.log("we are here");
+  console.log(result);
+  res.status(200).json(result);
+});
+
+
+router.post('/customersignup', async (req, res) => {
+      console.log(req.body);
+      const { name, phone_number, email,birthday,password,gender} = req.body; // Extract form data
+      const salt = await bcrypt.hash(password,10);
+      console.log(salt);
+      const query="insert into customer (name, phone_number, e_mail,birtday,hash_password,gender)values($1,$2,$3,TO_DATE($4, 'YYYY/MM/DD'),$5,$6)";
+      const values=[name, phone_number, email,birthday,salt,gender];
+      try{
+        const result=await db_query(query,values);
+        console.log(result);
+        res.status(200).send('Row added successfully!');
+      }
+      catch(error){
+        console.error('Error adding row:', error);
+        res.status(500).send('Error adding row to the database.');
+      }
+});
 
 
 // router.post('/shop/:license_no',async(req,res)=>{
@@ -72,37 +98,48 @@ async function db_query(query,params) {
 //   }
 // });
 
-router.post('/customer/login', async (req, res) => {
-  const { phone_no,password } = (req.body);
-  const login_query="SELECT * FROM CUSTOMER WHERE phone_number=$1 and password=$2"; 
-  const values = [phone_no, password]; 
+router.post('/customer_login', async (req, res) => {
+  const { phone_number,password } = req.body;
+  console.log(req.body);
+  console.log(phone_number);
+  const login_query=`SELECT * FROM customer WHERE phone_number = $1`; 
+  const values = [phone_number]; 
   try {
-    const result = await db_query(login_query, values);
-    if(result.rows.length==0){
-      res.status(500).send('Error verifying.');
+    const user = await db_query(login_query, values);
+    console.log(user);
+    if(user){
+
+      const comp=await bcrypt.compare(password,user[0].hash_password);
+      if(comp){
+        console.log('login successful', comp);
+        res.status(200).send('login successfully!');
+      }
+      else{
+        res.status(500).send('Error verifying.');
+      }
     }
     else{
-      console.log('login successful', result);
-      res.status(200).send('loginsuccessfully!');
+      console.log('login unsuccessful',comp);
+      res.status(200).send('login failed');
     }
   } catch (error) {
-    console.error('Error updating row:', error);
-    res.status(500).send('Error updating row to the database.');
+    console.error('Error logging in', error);
+    res.status(500).send('Error logging in to the database.');
   }
 });
 
-router.post('/shop/login', async (req, res) => {
+router.post('/shoplogin', async (req, res) => {
     const { license_no,password } = (req.body);
     const login_query="SELECT * FROM SHOP WHERE license_no=$1 and password=$2"; 
     const values = [license_no, password]; 
     try {
-      const result = await db_query(login_Query, values);
-      if(result.rows.length==0){
+      const result = await db_query(login_query, values);
+      if(result.length==0){
         res.status(500).send('Error verifying.');
       }
       else{
         console.log('login successful', result);
-        res.status(200).send('loginsuccessfully!');
+        res.status(200).send(result);
       }
     } catch (error) {
       console.error('Error updating row:', error);
@@ -126,10 +163,48 @@ router.post('/shop/update', async (req, res) => {
   }
 });
 
+router.get('/shop/add_product_page',async (req,res)=>{
+  try{
+    const query="select sub_category from category where sub_id=any (select distinct category from category)";
+    const result= await db_query(query,[]);
+    console.log("Checking result");
+    console.log(result);
+    const categories=[];
+    for (const row of result) {
+        //console.log(typeof(row.sub_category));
+        categories.push(row.sub_category);
+    }
+    //console.log(categories[1]);
+    const final_result=[];
+    
+    let i=0;
+    for(const category of categories){
+      const f_result=[];
+        const values=[category];
+        console.log(values);
+        const sub_query="select sub_id,category,sub_category from category where category=(select sub_id from category where sub_category=$1)";
+        const sub_result= await db_query(sub_query,values);
+        //console.log(sub_result);
+        for(const row of sub_result){
+            const sub_category={id:row.sub_id,name:row.category,cat:row.sub_category};
+            //console.log(sub_category);
+            f_result.push(sub_category);
+        }
+        const object={key:category,value: f_result};
+        console.log(object);
+        final_result.push(object);
+    }
+    console.log(final_result);
+    res.status(200).json(final_result)
+  }catch(error){
+    console.error('Error deleting row:', error);
+    res.status(500).send('Error deleting row from the database.');
+  }
+});
 
-result.post('/shop/add_product', async (req, res) => {
+router.post('/shop/add_product', async (req, res) => {
   //const temp=(req.body);
-  const { product_name,brand_name,id,price,availability,category,discount } = req.body;
+  const { product_name,brand_name,id,price,availability,category,discount,license_no } = req.body;
 
   // Update the row in the database
   const updateQuery = 'INSERT INTO PRODUCT (product_name,brand_name,id,price) VALUES ($1,$2,$3,$4)';
@@ -152,6 +227,23 @@ result.post('/shop/add_product', async (req, res) => {
 });
 
 
+router.post('/shopshow_products',async(req,res)=>{
+  const {license_no}=req.body;
+  console.log(license_no);
+  const query="select d.discount,d.availability,p.product_name,p.brand_name,p.price from (select * from shop  where license_no=$1) s join discount d on s.license_no=d.shop_license join product p on d.product_id=p.id";
+  const values = [license_no];
+  try{
+    const result=await db_query(query,values);
+    console.log('Row deleted successfully:', result);
+    res.status(200).send(result);
+  }
+  catch(error){
+    console.error('Error showing products', error);
+    res.status(500).send('Error showing products from the database.');
+  }
+})
+
+
 router.post('/shop/signout', async (req, res) => {
   //const temp=(req.body);
   const { license_no } = req.body;
@@ -172,38 +264,84 @@ router.post('/shop/signout', async (req, res) => {
 });
 
 
+router.post('/shop_delete_product', async (req, res) => {
+    const { product_id,shop_license } = req.body;
+    console.log(product_id);
+    console.log(shop_license);
+    try{
+      const deleteQuery = 'DELETE FROM DISCOUNT WHERE product_id = $1 and shop_license=$2';
+      const values = [product_id,shop_license];
+      const result = await db_query(deleteQuery, values);
+      console.log('Row deleted successfully:', result);
+      res.status(200).send('Row deleted successfully!');
+    }
+    catch(error){
+      console.error('Error deleting row:', error);
+      res.status(500).send('Error deleting row from the database.');
+    }
+})
+
+
 router.get('/',async(req,res)=>{
-    const query="select category from category where sub_id=any (select distinct category_id from category)";
-    const result=db_query(query,[]);
-    const categories=[];
-    for (const row of result.rows) {
-        categories.push(row[0]);
+    
+    try{
+      const query="select sub_category from category where sub_id=any (select distinct category from category)";
+      const result= await db_query(query,[]);
+      console.log("Checking result");
+      console.log(result);
+      const categories=[];
+      for (const row of result) {
+          //console.log(typeof(row.sub_category));
+          categories.push(row.sub_category);
+      }
+      //console.log(categories[1]);
+      const final_result=[];
+      
+      let i=0;
+      for(const category of categories){
+        const f_result=[];
+          const values=[category];
+          console.log(values);
+          const sub_query="select sub_id,category,sub_category from category where category=(select sub_id from category where sub_category=$1)";
+          const sub_result= await db_query(sub_query,values);
+          //console.log(sub_result);
+          for(const row of sub_result){
+              const sub_category={id:row.sub_id,name:row.category,cat:row.sub_category};
+              //console.log(sub_category);
+              f_result.push(sub_category);
+          }
+          const object={key:category,value: f_result};
+          console.log(object);
+          final_result.push(object);
+      }
+      console.log(final_result);
+      res.status(200).json(final_result)
+    }catch(error){
+      console.error('Error deleting row:', error);
+      res.status(500).send('Error deleting row from the database.');
     }
-    let i=0;
-    for(const category of categories){
-        const sub_query="select sub_id,name from category where category_id=(select sub_id from category where name=category)";
-        const sub_result=db_query(sub_query,[]);
-        for(const row of sub_result.rows){
-            const sub_category={id:row[0],name:row[1]};
-            result[i].push(sub_category);
-        }
-    }
-    res.status(200).json(result);
-});
+}); 
+
+
+//router.post('shop/show_products',async(req,res)=>{
 
 
 router.post('/productsundersubcategory',async(req,res)=>{
-      const {sub_id}=req.body;
-      const product_query="select p.name,d.shop_license,p.id from product_category pc where pc.s_id=$1 join product p on pc.product_id=p.id join discount d on d.product_id=p.id";
-      const product_result=db_query(product_query,[sub_id]);
+      let {name}=req.body;
+      console.log(name);
+      name=name.replace("'", " ");
+      console.log(name.toLowerCase());
+      const product_query="select * from (select * from category  where lower(replace(category.sub_category,'''',' '))=$1) c join product_category pc on c.sub_id=pc.s_id  join product p on pc.product_id=p.id join discount d on d.product_id=p.id;";
+      const product_result=await db_query(product_query,[name.toLowerCase()]);
+      console.log(product_result);
       res.status(200).json(product_result);
-})
+});
 
 
 
 router.post('/product_info',async(req,res)=>{
   const {product_id,shop_license}=req.body;
-  const query="select * from discount where product_id=$1 and shop_license=$2 join product on product.product_id=discount.product_id";
+  const query="select * from (select * from discount where product_id=$1 and shop_license=$2) d join product on d.product_id=product.id";
   const params=[product_id,shop_license];
   try {
     const result = await db.query(query, params);
@@ -216,12 +354,15 @@ router.post('/product_info',async(req,res)=>{
 });
 
 router.post('/search_something',async(req,res)=>{
-  const {text}=req.body;
-  text='%'+text+'%';
-  const query="select * from  product p where product_name like text join shop s on p.id=s.product_id";
+  let {text}=req.body;
+  console.log(text);
+  text="%"+text.toUpperCase()+"%";
+  console.log(text);
+  const query="select * from  (select * from product  where upper(product_name) like $1) p join discount d on d.product_id=p.id join shop s on s.license_no=d.shop_license";
   try{
     const result=await db.query(query,[text]);
-    if(result.rows.length==0){
+    console.log(result);
+    if(result.length==0){
       res.status(500).send('Nothing to be shown');
     }
     else{
