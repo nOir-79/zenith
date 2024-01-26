@@ -42,9 +42,15 @@ function login() {
   const handleShopLogin = () => {
     navigate("/shopLogin");
   };
+  const handleBackButton = () => {
+    navigate("/");
+  };
 
   return (
     <div className="login-body">
+      <button onClick={handleBackButton} className="back-button">
+        Back
+      </button>
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
@@ -101,7 +107,7 @@ function login() {
               value={formData.password}
               onChange={handleChange}
             />
-            <button className="button" type="submit">
+            <button className="button lgbtn" type="submit">
               Login
             </button>
           </form>

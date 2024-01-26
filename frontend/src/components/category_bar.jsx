@@ -8,7 +8,8 @@ import SubcategoriesWindow from "./subcategories_window.jsx";
 const CategoryBar = ({ categories, subcategories }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
-  for (let i = 0; i < 10; i++) {
+
+  for (let i = 0; i < 12; i++) {
     categories.push("Category");
   }
 
@@ -54,26 +55,28 @@ const CategoryBar = ({ categories, subcategories }) => {
   };
 
   return (
-    <div className="category-bar" onMouseLeave={handleCategoryLeave}>
-      <div className="category-container">
-        {categories.map((category, index) => (
-          <div
-            key={index}
-            className="category-link"
-            onMouseEnter={() => handleCategoryHover(category)}
-            onMouseLeave={handleCategoryLeave}
-          >
-            {category}
-            {selectedCategory === category.toLowerCase() && (
-              <SubcategoriesWindow
-                category={selectedCategory}
-                subcategories={subcategories[selectedCategory] || []}
-                onSubcategoryClick={handleSubcategoryClick}
-                onClose={handleCloseWindow}
-              />
-            )}
-          </div>
-        ))}
+    <div className="category-bar-container">
+      <div className="category-bar" onMouseLeave={handleCategoryLeave}>
+        <div className="category-container">
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className="category-link"
+              onMouseEnter={() => handleCategoryHover(category)}
+              onMouseLeave={handleCategoryLeave}
+            >
+              {category}
+              {selectedCategory === category.toLowerCase() && (
+                <SubcategoriesWindow
+                  category={selectedCategory}
+                  subcategories={subcategories[selectedCategory] || []}
+                  onSubcategoryClick={handleSubcategoryClick}
+                  onClose={handleCloseWindow}
+                />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

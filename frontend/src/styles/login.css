@@ -10,6 +10,32 @@
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 }
 
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  background-color: linear-gradient(
+    to bottom,
+    #0f0c29,
+    #302b63,
+    #24243e
+  ); /* Stylish blue color */
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  margin-top: -100px;
+}
+
+.back-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
 .shopLogin {
   display: inline-block;
   padding: 10px 20px;
@@ -94,6 +120,9 @@ label {
   border-radius: 5px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+.lgbtn {
+  color: #535050;
 }
 
 .button:hover {
