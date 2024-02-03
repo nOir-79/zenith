@@ -207,7 +207,7 @@ router.post('/shop/add_product', async (req, res) => {
   const { product_name,brand_name,id,price,availability,category,discount,license_no } = req.body;
 
   // Update the row in the database
-  const updateQuery = 'INSERT INTO PRODUCT (product_name,brand_name,id,price) VALUES ($1,$2,$3,$4)';
+  const updateQuery = 'INSERT INTO product (product_name,brand_name,id,price) VALUES ($1,$2,$3,$4);commit;';
   const values = [product_name,brand_name,id,price];
   try{
     db.query(updateQuery, values).then((result) => {
