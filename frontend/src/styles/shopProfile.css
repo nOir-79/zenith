@@ -1,0 +1,188 @@
+.shop-profile-body {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  background: linear-gradient(135deg);
+}
+
+.product-information-under-image {
+  display: flex;
+  justify-content: space-between;
+}
+
+.three-dots-product {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.three-dots-product button {
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.2s;
+  padding: 5px;
+}
+.three-dots-product button:hover {
+  background-color: #aac9a6;
+  border-radius: 10px;
+}
+
+.shop-image {
+  background: url("shop_2.jpg");
+  background-size: cover;
+}
+
+.right-side-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.shop-product-sort {
+  width: 100px;
+}
+.shop-custom-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.page-navigation-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-side-bar {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.shop-product-card {
+  background: #ffffff;
+  border-radius: 10px;
+  height: 300px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out;
+}
+.shop-product-image {
+  height: 200px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.shop-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-product-card:hover {
+  transform: scale(1.05);
+  border: 1px #706993 solid;
+}
+
+.product-information-under-image {
+  background-color: #c0cfb0;
+  /* #b9d29d; */
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+}
+
+.shop-product-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #6e6f72;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.shop-product-price {
+  color: #666;
+  font-size: 1rem;
+}
+
+.shop-button {
+  display: flex;
+}
+.button-style {
+  font-family: "Arial", sans-serif;
+  border: 2px solid #b7a4b6;
+  padding: 0.5rem 1rem;
+  width: 100px;
+  margin-right: 5px;
+  margin-top: 30px;
+  background-color: #ffffff;
+  color: #5d5463;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 10px;
+}
+.left-top-shop {
+  padding: 5px 10px 5px 10px;
+  background-color: #b9d29d;
+  border-radius: 10px;
+  color: rgb(64, 62, 62);
+}
+
+.left-top-shop:hover {
+  background-color: #72a276;
+  color: black;
+}
+
+/* Hover effect */
+.button-style:hover {
+  background-color: #b9d29d;
+  color: #6e6f72; /* Change text color on hover */
+  border-color: #adadad;
+}
+.add-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-icon {
+  height: 90px;
+  width: 90px;
+}
+
+.shop-product-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6e716a;
+  padding: 0;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #b2bb98;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.hover-dots {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: #b9d29d;
+}
+.hover-dots button {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.first-update {
+  border-bottom: 1px solid #706993;
+}
+
+.hover-dots button:hover {
+  border-radius: 0;
+  background: white;
+  color: #b9d29d;
+}

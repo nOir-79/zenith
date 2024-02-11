@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 const ProductDetailsPage = () => {
   const location = useLocation();
   const { product } = location.state || {};
+  console.log(product);
   const { product_name, price } = product;
   const description = "This is a car";
   const Rating = 4.5;

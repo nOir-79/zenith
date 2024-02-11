@@ -6,7 +6,7 @@ const ShowProduct = ({ licenseNo }) => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState(null);
   const handleNavigateToShowProduct = () => {
-    navigate("/productDetails", { state: { license_no: `licenserNo` } });
+    navigate("/productDetails", { state: { license_no: `license_No` } });
   };
 
   useEffect(() => {
