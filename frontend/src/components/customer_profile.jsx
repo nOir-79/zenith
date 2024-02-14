@@ -1,11 +1,11 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/customerProfile.css";
+import { useData } from "./Datacontext.jsx";
 
 const CustomerProfile = () => {
-  const location = useLocation();
-  const customer_data = location.state || {};
-  const { phone_number, e_mail, gender, birthday, name } = customer_data[0];
+  const { customerData, setCustomerData } = useData();
+  const { phone_number, e_mail, gender, birthday, name } = customerData[0];
   const Navigate = useNavigate();
   const handleBack = () => {
     Navigate("/");

@@ -1,12 +1,12 @@
 // SearchResultsPage.jsx
 import React from "react";
-import { useLocation } from "react-router-dom";
 import "../styles/searchResults.css"; // Import the corresponding CSS file
+import { useData } from "./Datacontext.jsx";
 
 const SearchResultsPage = () => {
-  const location = useLocation();
-  const { products } = location.state;
-
+  const { showProduct, setShowProduct } = useData();
+  const products = showProduct;
+  setShowProduct([]);
   return (
     <div className="search-results-page">
       <h2>Search Results</h2>

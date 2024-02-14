@@ -1,19 +1,43 @@
-// DataContext.js
 import React, { createContext, useContext, useState } from "react";
 
-// Create a context
 const DataContext = createContext();
 
-// Create a custom hook to consume the context
-export const useDataContext = () => useContext(DataContext);
-
-// Create a provider component to wrap the entire application
 export const DataProvider = ({ children }) => {
-  const [data, setData] = useState(null);
+  const [category, setCategory] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [clickedSubcategory, setClickedSubcategory] = useState("");
+  const [subcategoryClicked, setSubcategoryClicked] = useState(false);
+  const [productsundersubcategory, setProductsundersubcategory] = useState([]);
+  const [showProduct, setShowProduct] = useState([]);
+  const [customerData, setCustomerData] = useState([{}]);
+  const [shopData, setShopData] = useState([{}]);
 
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider
+      value={{
+        category,
+        setCategory,
+        products,
+        setProducts,
+        clickedSubcategory,
+        setClickedSubcategory,
+        showProduct,
+        setShowProduct,
+        productsundersubcategory,
+        setProductsundersubcategory,
+        subcategoryClicked,
+        setSubcategoryClicked,
+        customerData,
+        setCustomerData,
+        shopData,
+        setShopData,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );
+};
+
+export const useData = () => {
+  return useContext(DataContext);
 };

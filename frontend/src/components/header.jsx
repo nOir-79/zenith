@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-// import "../styles/header.css";
+import "../styles/header.css";
+import { useData } from "./Datacontext.jsx";
 import UserDropDown from "./userDropDown";
 
 const Header = ({ userPage }) => {
+  const { showProduct, setShowProduct } = useData();
   const [isUserIconHovered, setIsUserIconHovered] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -28,21 +30,13 @@ const Header = ({ userPage }) => {
 
       if (response.status === 200) {
         const searchResults = await response.json();
+        setShowProduct(searchResults);
 
-        // const result = JSON.parse(searchResults);
-        // console.log(result);
         console.log(typeof searchResults);
-        console.log(searchResults);
-        // const sendProductData = () => {
-        //   const productData = {
-        //     type: "SET_PRODUCT_DATA",
-        //     payload: searchResults,
-        //   };
-        //   dispatch(setProductData(sendProductData));
-        // };
-
+        console.log("searchResults:", searchResults);
         // Navigate to the search results page with the products as a prop
-        navigate("/searchbar", { state: { products: searchResults } });
+        // navigate("/searchbar", { state: { products: searchResults } });
+        navigate("/searchbar");
       } else {
         console.error("Error fetching search results");
       }
@@ -53,7 +47,7 @@ const Header = ({ userPage }) => {
 
   return (
     <>
-      <header className="bg-gray-800 p-4 text-white">
+      <header className=" p-4 text-white ecommerce-header">
         <div className="flex items-center">
           <div className="flex-1">
             <div className="search-bar flex items-center">
@@ -84,10 +78,10 @@ const Header = ({ userPage }) => {
           <div className="user-icons flex items-center space-x-4">
             {!userPage && (
               <Link to="/login">
-                <FaUser className="icon" />
+                <FaUser className="header-icon" />
               </Link>
             )}
-            <FaShoppingCart className="icon" />
+            <FaShoppingCart className="header-icon" />
             {userPage && (
               <CiUser
                 className="icon user"
