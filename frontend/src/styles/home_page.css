@@ -1,7 +1,100 @@
-body {
-  margin: 0;
+.homePage {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-Header {
-  margin-bottom: 20px;
+#horizontal-bar {
+  border-bottom: 1px solid black;
+  width: 100vw;
+}
+
+.homepage-featured-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 120px 80px 120px 80px;
+  justify-content: center;
+}
+
+.featured-before-slide {
+  display: flex;
+  justify-content: space-between;
+}
+.featured-before-slide-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage-discounted-content {
+  display: flex;
+  padding: 0 80px 0 80px;
+}
+.homepage-discounted-content-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage-discounted-content-left .discounted-buttons {
+  display: flex;
+}
+.discounted-signUp {
+  display: flex;
+}
+
+.homepage-shopSignup {
+  display: flex;
+  flex-direction: column;
+  padding: 0 80px 0 80px;
+}
+
+.homepage-shopSignup .homepage-shopSignup-buttons {
+  display: flex;
+}
+
+.platform-review {
+  display: flex;
+  padding: 0 80px 0 80px;
+}
+
+.platform-review-review {
+  display: flex;
+  flex-direction: column;
+}
+
+.frequently-asked {
+  display: flex;
+  flex-direction: column;
+  padding: 0 80px 0 80px;
+}
+
+.question-answer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.home-getInTouch {
+  display: flex;
+  flex-direction: column;
+  padding: 0 80px 0 80px;
+}
+
+.home-getInTouch .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-getInTouch .top .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-getInTouch .top .right {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-getInTouch .top .right .inner-div {
+  display: flex;
+  flex-direction: column;
 }

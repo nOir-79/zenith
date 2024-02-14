@@ -1,53 +1,60 @@
-/* styles.css (or styles.scss, styles.less, etc.) */
+.homepage-header {
+  padding: 0 80px 0 80px;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+.page-logo {
+  height: 100px;
+}
 
-.ecommerce-header {
+.header-left-side {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff; /* Background color for the header */
-  padding: 10px 20px;
-  color: #222; /* Light text color */
+  width: 30%;
+  padding-right: 30px;
 }
-
-.search-bar {
+.header-middle {
+  display: flex;
+  align-items: center;
+  width: 50%;
   position: relative;
-  height: 25px;
-  width: 400px;
 }
-
-.search-icon {
-  position: absolute;
-  top: 80%;
-  right: 2px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  /* Adjust the margin between the search icon and input field */
-}
-
-.search-input {
-  padding: 8px;
-  height: 100%;
-  border: 1px solid #222; /* Border color same as text color */
-  outline: none;
+.header-middle input {
   width: 100%;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 0px 5px 0;
+  margin-right: 40px;
+}
+.header-middle .header-search-logo {
+  padding: 0px -30px 0px 0px;
+  position: absolute;
+  right: 50px;
+}
+.header-right-side {
   display: flex;
+  width: 5%;
+  justify-content: space-between;
   align-items: center;
 }
 
-.logo {
-  flex-grow: 1; /* Allow the logo to grow and take available space */
-  text-align: center; /* Center the logo within the available space */
-}
-
-.logo-image {
-  max-height: 50px; /* Adjust the maximum height of the logo */
-}
-
-.user-icons {
+.header-left-side .left-side-buttons {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 
-.icon {
-  margin-left: 15px; /* Adjust the margin between the icons */
+.header-left-side .left-side-buttons h2 {
+  padding: 5px 10px 5px 10px;
+  margin: 10px;
+  margin-left: 10px;
+}
+
+.header-left-side .left-side-buttons h2:hover {
+  cursor: pointer;
+  border-bottom: 1px solid black;
 }

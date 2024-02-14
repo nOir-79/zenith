@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { CiUser } from "react-icons/ci";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-// import "../styles/header.css";
-import UserDropDown from "./userDropDown";
+import { FiShoppingCart } from "react-icons/fi";
+import { IoSearch } from "react-icons/io5";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+import "../styles/header.css";
 
 const Header = ({ userPage }) => {
   const [isUserIconHovered, setIsUserIconHovered] = useState(false);
@@ -53,50 +53,31 @@ const Header = ({ userPage }) => {
 
   return (
     <>
-      <header className="bg-gray-800 p-4 text-white">
-        <div className="flex items-center">
-          <div className="flex-1">
-            <div className="search-bar flex items-center">
-              <input
-                type="text"
-                placeholder="What can we help you to find?"
-                className="search-input p-2 rounded-l-lg text-gray-950"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button
-                className="search-icon bg-blue-500 text-white p-2 rounded-r-lg"
-                onClick={handleSearch}
-              >
-                <FaSearch />
-              </button>
-            </div>
-          </div>
-
-          <div className="logo">
+      <header className="homepage-header">
+        <div className="header-left-side">
+          <div className="header-logo">
             <img
-              src="/path/to/logo.png"
-              alt="E-commerce Logo"
-              className="logo-image"
+              src="project_logo.png"
+              alt="This is the logo of the page"
+              className="page-logo"
             />
           </div>
-
-          <div className="user-icons flex items-center space-x-4">
-            {!userPage && (
-              <Link to="/login">
-                <FaUser className="icon" />
-              </Link>
-            )}
-            <FaShoppingCart className="icon" />
-            {userPage && (
-              <CiUser
-                className="icon user"
-                onMouseEnter={handleUserIconHover}
-              />
-            )}
+          <div className="left-side-buttons">
+            <h2>Deals</h2>
+            <h2>Categories</h2>
           </div>
-
-          {isUserIconHovered && <UserDropDown hovered={isUserIconHovered} />}
+        </div>
+        <div className="header-middle">
+          <input type="text" placeholder="" />
+          <IoSearch className="header-search-logo" />
+        </div>
+        <div className="header-right-side">
+          <div className="header-login">
+            <RiLoginBoxLine />
+          </div>
+          <div className="header-shoppingCart">
+            <FiShoppingCart />
+          </div>
         </div>
       </header>
     </>
