@@ -36,7 +36,7 @@ const CategoryBar = () => {
       if (response.status == 200) {
         setSubcategoryClicked(true);
         const products = await response.json();
-        productsundersubcategory, setProductsundersubcategory(products);
+        setProductsundersubcategory(products);
         navigate("/searchbar");
       }
     } catch (error) {
