@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaEllipsisV } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/shopProfile.css";
+import { useData } from "./Datacontext.jsx";
 const ShopProfile = () => {
-  const location = useLocation();
-  const { shopData } = location.state;
+  const { shopData, setShopData } = useData();
   const { address, e_mail, license_no, name, password, phone_no } = shopData;
+  const [orderClicked, setOrderClicked] = useState(false);
   const navigate = useNavigate();
 
   const [shopProducts, setShopProducts] = useState([]);
@@ -134,6 +135,9 @@ const ShopProfile = () => {
     }
   };
 
+  const handleOrders = async (e) => {
+    setOrderClicked(!orderClicked);
+  };
   return (
     <>
       <div className="w-screen shop-profile-body">
@@ -158,8 +162,11 @@ const ShopProfile = () => {
                 <li className="mb-2 left-top-shop">Shop Policies</li>
               </ul>
               <ul className="w-full left-side-bar">
-                <li className="mb-2">Contact</li>
-                <li className="mb-2">Report</li>
+                <li className="left-sidebar-item" onClick={handleOrders}>
+                  Orders
+                </li>
+                <li className="left-sidebar-item">Contact</li>
+                <li className="left-sidebar-item">Report</li>
               </ul>
             </div>
 

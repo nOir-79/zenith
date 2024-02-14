@@ -60,6 +60,20 @@
   padding-top: 50px;
 }
 
+.left-sidebar-item {
+  padding: 10px 0px 10px 0px;
+  background: #8c666d;
+  margin: 5px;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px;
+  color: rgb(222, 215, 215);
+}
+.left-sidebar-item:hover {
+  background: #c0cfb0;
+  color: white;
+}
+
 .shop-product-card {
   background: #ffffff;
   border-radius: 10px;
@@ -137,8 +151,8 @@
 
 /* Hover effect */
 .button-style:hover {
-  background-color: #b9d29d;
-  color: #6e6f72; /* Change text color on hover */
+  background-color: #8c666d;
+  color: white; /* Change text color on hover */
   border-color: #adadad;
 }
 .add-icon-container {

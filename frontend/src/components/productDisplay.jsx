@@ -1,13 +1,28 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/productDisplay.css";
+import { useData } from "./Datacontext.jsx";
 import ProductCard from "./productCard";
 const ProductDisplay = () => {
+  let products;
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location.state);
-  const { products } = location.state;
+  const {
+    showProduct,
+    setShowProduct,
+    subcategoryClicked,
+    setClickedSubcategory,
+    productsundersubcategory,
+    setProductsundersubcategory,
+  } = useData();
+  if (subcategoryClicked) {
+    products = productsundersubcategory;
+  } else {
+    products = showProduct;
+  }
   const handleBackButtonClick = () => {
+    setShowProduct([]);
+    setClickedSubcategory("");
+    setProductsundersubcategory([]);
     navigate("/");
   };
   console.log(products);

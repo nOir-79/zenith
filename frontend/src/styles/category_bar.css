@@ -1,38 +1,47 @@
-/*styles.css (or styles.scss, styles.less, etc.)*/
-
-.category-bar-container {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding-bottom: 10px;
-}
-
 .category-bar {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 10px 0;
-  background-color: #222;
-  color: #fff;
+  flex-direction: row;
+  position: relative;
+  background-color: #a46a71;
+  padding: 10px 0px 10px 0px;
 }
 
-.category-container {
+.category-item {
+  cursor: pointer;
+  padding: 0px 10px 0px 10px;
+}
+
+.subcategory-window {
+  position: absolute;
+  height: 400px;
+  width: 100vw;
+  top: calc(100%+2px);
+  left: 0;
   display: flex;
-  padding: 0 10px;
+  flex-direction: column;
+  background-color: #f0e2e3;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1;
+  overflow-y: auto;
 }
 
-.category-link {
-  padding: 8px 15px;
-  color: #ecf0f1;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s ease;
+.subcategory-container {
+  display: flex;
+  flex-direction: row;
+}
+.subcategory-item {
+  padding: 15px;
+  margin: 5px;
+  cursor: pointer;
+  color: white;
+}
+.subcategory-item:hover {
+  color: #44344f;
+  border-bottom: 1px solid #44344f;
 }
 
-.category-link:hover {
-  background-color: #2c3e50;
-}
-/* styles.css (or styles.scss, styles.less, etc.) */
-
-/* styles.css (or styles.scss, styles.less, etc.) */
+/* Additional styling can be added for better appearance */

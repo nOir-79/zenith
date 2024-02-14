@@ -3,32 +3,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/category_bar.css";
-import SubcategoriesWindow from "./subcategories_window.jsx";
+import { useData } from "./Datacontext.jsx";
 
-const CategoryBar = ({ categories, subcategories }) => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+const CategoryBar = () => {
+  const {
+    category,
+    setCategory,
+    subcategoryClicked,
+    setSubcategoryClicked,
+    productsundersubcategory,
+    setProductsundersubcategory,
+  } = useData();
+  const categories = category;
+  const [hoveredCategory, setHoveredCategory] = useState(null);
   const navigate = useNavigate();
-
-  for (let i = 0; i < 12; i++) {
-    categories.push("Category");
-  }
-
   const handleCategoryHover = (category) => {
-    setSelectedCategory(category.toLowerCase());
+    setHoveredCategory(category);
   };
-
-  const handleCloseWindow = () => {
-    setSelectedCategory(null);
-  };
-
-  const handleCategoryLeave = () => {
-    setSelectedCategory(null);
-  };
-
   const handleSubcategoryClick = async (subcategory) => {
     try {
-      // Perform a fetch post request with the subcategory name
-      console.log("subcategory", subcategory);
       const response = await fetch(
         "http://localhost:3000/productsundersubcategory",
         {
@@ -40,44 +33,44 @@ const CategoryBar = ({ categories, subcategories }) => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch product data");
+      if (response.status == 200) {
+        setSubcategoryClicked(true);
+        const products = await response.json();
+        setProductsundersubcategory(products);
+        navigate("/searchbar");
       }
-
-      const data = await response.json();
-      console.log("data", data);
-
-      // Navigate to another page with the product data as state
-      navigate("/searchbar", { state: { products: data } });
     } catch (error) {
-      console.error("Error fetching product data:", error);
+      console.error("Error during subcategory click:", error);
     }
   };
 
   return (
-    <div className="category-bar-container">
-      <div className="category-bar" onMouseLeave={handleCategoryLeave}>
-        <div className="category-container">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="category-link"
-              onMouseEnter={() => handleCategoryHover(category)}
-              onMouseLeave={handleCategoryLeave}
-            >
-              {category}
-              {selectedCategory === category.toLowerCase() && (
-                <SubcategoriesWindow
-                  category={selectedCategory}
-                  subcategories={subcategories[selectedCategory] || []}
-                  onSubcategoryClick={handleSubcategoryClick}
-                  onClose={handleCloseWindow}
-                />
-              )}
+    <div className="category-bar">
+      {categories.map((category) => (
+        <div
+          key={category.key}
+          className="category-item"
+          onMouseEnter={() => handleCategoryHover(category)}
+          onMouseLeave={() => setHoveredCategory(null)}
+        >
+          {category.key}
+          {hoveredCategory && hoveredCategory.key === category.key && (
+            <div className="subcategory-window">
+              <div className="subcategory-container">
+                {category.value.map((subCategory) => (
+                  <div
+                    key={subCategory.id}
+                    className="subcategory-item"
+                    onClick={handleSubcategoryClick.bind(this, subCategory.cat)}
+                  >
+                    {subCategory.cat}
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          )}
         </div>
-      </div>
+      ))}
     </div>
   );
 };

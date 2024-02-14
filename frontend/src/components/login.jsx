@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useData } from "./Datacontext.jsx";
 
 import "../styles/login.css";
 function login() {
+  const { customerData, setCustomerData } = useData();
   const [formData, setFormData] = useState({
     phone_number: "",
     password: "",
@@ -46,7 +48,10 @@ function login() {
       if (response.status == 200) {
         // Redirect to a new page upon successful login
         console.log("login successful");
-        navigate("/customerProfile", { state: customer_data });
+
+        console.log("customer_data", customer_data);
+        setCustomerData(customer_data);
+        navigate("/customerProfile");
       } else {
         // Handle unsuccessful login (show error message, etc.)
         console.error("Login failed");

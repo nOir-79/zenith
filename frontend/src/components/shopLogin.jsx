@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useData } from "./Datacontext.jsx";
 
 import "../styles/shopLogin.css";
 function login() {
+  const { shopData, setShopData } = useData();
   const [formData, setFormData] = useState({ license_no: "", password: "" });
   const [signupData, setSignupData] = useState({
     name: "",
@@ -41,7 +43,8 @@ function login() {
       data = response_json[0];
       if (response.status == 200) {
         console.log("signup successful");
-        navigate("/shopProfile", { state: { shopData: data[0] } });
+        setShopData(data[0]);
+        navigate("/shopProfile");
       } else {
         console.error("Signup failed");
       }
@@ -68,7 +71,8 @@ function login() {
       if (response.status == 200) {
         console.log("login successful");
         // Redirect to a new page upon successful login
-        navigate("/shopProfile", { state: { shopData: data[0] } });
+        setShopData(data[0]);
+        navigate("/shopProfile");
       } else {
         // Handle unsuccessful login (show error message, etc.)
         console.error("Login failed");

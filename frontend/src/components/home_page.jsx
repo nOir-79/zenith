@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   CiCircleChevLeft,
   CiCircleChevRight,
@@ -10,40 +10,25 @@ import "../styles/home_page.css";
 import Footer from "./footer.jsx";
 import Header from "./header.jsx";
 function HomePage(user) {
-  console.log("User:", user);
   const isUserPage = user["user"];
-  const [categories, setCategories] = useState([]);
-  const [subcategories, setSubcategories] = useState({});
+
+  const { category, setCategory } = useData();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3000/");
         const data = await response.json();
-        const category = data.map((item) => item.key);
-        const subcategory = data.flatMap((item) =>
-          item.value.map((subItem) => subItem.cat)
-        );
-        const categoryMap = {};
-
-        data.forEach((item) => {
-          const category = item.key.toLowerCase();
-          const subcategories = item.value.map((subItem) =>
-            subItem.cat.toLowerCase()
-          );
-          categoryMap[category] = subcategories;
-        });
-        console.log("Category:", category);
-        console.log("Subcategory:", subcategory);
-        console.log("Category Map:", categoryMap);
-        setCategories(category);
-        setSubcategories(categoryMap);
+        console.log("Data:", data);
+        setCategory(data);
+        console.log(category);
       } catch (error) {
         console.error("Error fetching categories: ", error);
       }
     };
     fetchData();
   }, []);
+
   return (
     <>
       <div className="homePage">
@@ -238,3 +223,24 @@ function HomePage(user) {
 }
 
 export default HomePage;
+
+// const categories = category.map((item) => item.key);
+// const subcategory = category.flatMap((item) =>
+//   item.value.map((subItem) => subItem.cat)
+// );
+// const categoryMap = {};
+
+// category.forEach((item) => {
+//   const categories = item.key.toLowerCase();
+//   const subcategories = item.value.map((subItem) =>
+//     subItem.cat.toLowerCase()
+//   );
+//   categoryMap[categories] = subcategories;
+// });
+// console.log("Category:", categories);
+// console.log("Subcategory:", subcategory);
+// console.log("Category Map:", categoryMap);
+// setCategories(categories);
+// setSubcategories(categoryMap);
+// const [categories, setCategories] = useState([]);
+// const [subcategories, setSubcategories] = useState({});
