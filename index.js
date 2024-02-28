@@ -7,6 +7,7 @@ const cors=require('cors');
 const bodyParser = require('body-parser');
 const { as } = require('pg-promise');
 var bcrypt = require('bcryptjs');
+const { v4: uuidv4, validate: uuidValidate, parse: uuidParse } = require('uuid');
 
 
 
@@ -24,8 +25,8 @@ async function db_query(query,params) {
     return res;
 }
 
-router.get('/shop',async(req,res)=>{
-  const query="SELECT * FROM customer";
+router.get('/products',async(req,res)=>{
+  const query="SELECT * FROM product";
   const params=[];
   const result=await db_query(query,params);
   console.log("we are here");
@@ -34,13 +35,49 @@ router.get('/shop',async(req,res)=>{
 });
 
 
-router.post('/customersignup', async (req, res) => {
+router.post('/customerSignUp', async (req, res) => {
       console.log(req.body);
-      const { name, phone_number, email,birthday,password,gender} = req.body; // Extract form data
+      const { name, phone_number,password} = req.body;
       const salt = await bcrypt.hash(password,10);
       console.log(salt);
-      const query="insert into customer (name, phone_number, e_mail,birtday,hash_password,gender)values($1,$2,$3,TO_DATE($4, 'YYYY/MM/DD'),$5,$6)";
-      const values=[name, phone_number, email,birthday,salt,gender];
+      const query="insert into customer (name,phone_number,hash_password)values($1,$2,$3)";
+      const values=[name,phone_number,salt];
+      try{
+        const result=await db_query(query,values);
+        console.log(result);
+        res.status(200).send(result);
+      }
+      catch(error){
+        console.error('Error adding row:', error);
+        res.status(500).send('Error adding row to the database.');
+      }
+});
+
+router.post('/shopSignUp', async (req, res) => {
+  console.log(req.body);
+  const { name,phone_number,license_no,password} = req.body;
+  //const salt = await bcrypt.hash(password,10);
+  //console.log(salt);
+  const query="insert into shop (name,phone_number,license_no,password)values($1,$2,$3,$4)";
+  const values=[name,phone_number,license_no,password];
+  try{
+    const result=await db_query(query,values);
+    const new_query="select * from shop where license_no=$3";
+    const new_result=await db_query(new_query,values);
+    console.log(new_result);
+    res.status(200).send(new_result);
+  }
+  catch(error){
+    console.error('Error adding row:', error);
+    res.status(500).send('Error adding row to the database.');
+  }
+});
+
+
+router.post('/customerinfo',async(req,res)=>{
+      const {phone_number}=req.body;
+      const query="insert into customer (name) values($1)";
+      const values=[phone_number];
       try{
         const result=await db_query(query,values);
         console.log(result);
@@ -50,55 +87,32 @@ router.post('/customersignup', async (req, res) => {
         console.error('Error adding row:', error);
         res.status(500).send('Error adding row to the database.');
       }
+})
+
+router.post('/shoplogin', async (req, res) => {
+  const { license_no,password } = (req.body);
+  console.log(req.body);
+  console.log(license_no);
+  console.log(password);
+  const login_query='SELECT * FROM shop WHERE license_no=$1 and password=$2'; 
+  const values = [license_no, password]; 
+  try {
+    const result = await db_query(login_query, values);
+    if(result!=""){
+      console.log('login successful', result);
+      res.status(200).send(result);
+    }
+    else{
+      res.status(500).send('Error verifying.');
+    }
+  } catch (error) {
+    console.error('Error updating row:', error);
+    res.status(500).send('Error updating row to the database.');
+  }
 });
 
 
-// router.post('/shop/:license_no',async(req,res)=>{
-//   const { license_no } = (req.body);
-//   const values = [license_no];
-//   console.log(values);
-//   const query="SELECT * FROM SHOP WHERE license_no=$1";
-//   // const result=await db_query(query,params);
-//   // res.status(200).json(result);
-//   try {
-//     const result = await db_query(query, values);
-//     //console.log(result);
-//     console.log('shop verified  successfully:', result);
-//     res.status(200).send('shop verified successfully!');
-//   } catch (error) {
-//     console.error('Error verifying:', error);
-//     res.status(500).send('Error verifying.');
-//   }
-// });
-
-// router.post('/shop', async (req, res) => {
-//   //const temp=(req.body);
-//   const data = {
-//     name: "startech",
-//     phone_number: "123780",
-//     email: "a@gmail.com",
-//     address: "1, rankin",
-//     license_no: "234589",
-//   };
-//   const { name, phone_number, email,address,license_no} =data; // Extract form data
-//   //console.log(temp);
-//   //console.log(req.headers);
-
-//   // Perform database insertion
-//   const query = 'INSERT INTO SHOP (name,phone_number,email,address,license_no,category) VALUES ($1,$2,$3,$4,$5,$6)'; // Replace YourTableName with your actual table name
-//   const values = [name, phone_number, email,address,license_no,category];
-
-//   try {
-//     const result = await db_query(query, values);
-//     console.log('Row added successfully:', result);
-//     res.status(200).send('Row added successfully!');
-//   } catch (error) {
-//     console.error('Error adding row:', error);
-//     res.status(500).send('Error adding row to the database.');
-//   }
-// });
-
-router.post('/customer_login', async (req, res) => {
+router.post('/customerlogin', async (req, res) => {
   const { phone_number,password } = req.body;
   console.log(req.body);
   console.log(phone_number);
@@ -108,11 +122,10 @@ router.post('/customer_login', async (req, res) => {
     const user = await db_query(login_query, values);
     console.log(user);
     if(user){
-
       const comp=await bcrypt.compare(password,user[0].hash_password);
       if(comp){
         console.log('login successful', comp);
-        res.status(200).send('login successfully!');
+        res.status(200).send(user);
       }
       else{
         res.status(500).send('Error verifying.');
@@ -120,7 +133,7 @@ router.post('/customer_login', async (req, res) => {
     }
     else{
       console.log('login unsuccessful',comp);
-      res.status(200).send('login failed');
+      res.status(300).send('login failed');
     }
   } catch (error) {
     console.error('Error logging in', error);
@@ -128,32 +141,28 @@ router.post('/customer_login', async (req, res) => {
   }
 });
 
-router.post('/shoplogin', async (req, res) => {
-    const { license_no,password } = (req.body);
-    const login_query="SELECT * FROM SHOP WHERE license_no=$1 and password=$2"; 
-    const values = [license_no, password]; 
-    try {
-      const result = await db_query(login_query, values);
-      if(result.length==0){
-        res.status(500).send('Error verifying.');
-      }
-      else{
-        console.log('login successful', result);
-        res.status(200).send(result);
-      }
-    } catch (error) {
-      console.error('Error updating row:', error);
-      res.status(500).send('Error updating row to the database.');
-    }
-});
-router.post('/shop/update', async (req, res) => {
+
+
+router.post('/shop/product_update', async (req, res) => {
   //const temp=(req.body);
-  const { license_no, phone_number,email, address } = req.body;
+  const { product_id,license_no,availability,discount } = req.body;
 
   // Update the row in the database
-  const updateQuery = 'UPDATE SHOP SET phone_number = $2, phone_number = $3,email = $4 WHERE license_no = $1';
-  const values = [license_no, phone_number,email, address];
+  let updateQuery = "";
+  const values = [product_id,license_no,availability,discount];
   try {
+    if(availability=="" && discount==""){
+      res.status(300).send('Nothing to be updated');
+    }
+    else if(availability==""){
+      updateQuery = 'UPDATE discount SET discount = $4 WHERE shop_license = $2 and product_id=$1';
+    }
+    else if(discount==""){
+      updateQuery = 'UPDATE discount SET availability = $3 WHERE shop_license = $2 and product_id=$1';
+    }
+    else{
+      updateQuery = 'UPDATE discount SET availability=$3,discount = $4 WHERE shop_license = $2 and product_id=$1';
+    }
     const result = await db.query(updateQuery, values);
     console.log('Row updated successfully:', result);
     res.status(200).send('Row updated successfully!');
@@ -162,6 +171,9 @@ router.post('/shop/update', async (req, res) => {
     res.status(500).send('Error updating row to the database.');
   }
 });
+
+
+
 
 router.get('/shop/add_product_page',async (req,res)=>{
   try{
@@ -207,7 +219,7 @@ router.post('/shop/add_product', async (req, res) => {
   const { product_name,brand_name,id,price,availability,category,discount,license_no } = req.body;
 
   // Update the row in the database
-  const updateQuery = 'INSERT INTO product (product_name,brand_name,id,price) VALUES ($1,$2,$3,$4);commit;';
+  const updateQuery = 'INSERT INTO product (product_name,brand_name,id,price) VALUES ($1,$2,$3,$4)';
   const values = [product_name,brand_name,id,price];
   try{
     db.query(updateQuery, values).then((result) => {
@@ -227,11 +239,11 @@ router.post('/shop/add_product', async (req, res) => {
 });
 
 
-router.post('/shopshow_products',async(req,res)=>{
-  const {license_no}=req.body;
-  console.log(license_no);
-  const query="select d.discount,d.availability,p.product_name,p.brand_name,p.price from (select * from shop  where license_no=$1) s join discount d on s.license_no=d.shop_license join product p on d.product_id=p.id";
-  const values = [license_no];
+router.post('/shop_show_products',async(req,res)=>{
+  const {license_No}=req.body;
+  console.log(license_No);
+  const query="select d.discount,d.availability,p.product_name,p.brand_name,p.price,p.id from (select * from shop  where license_no=$1) s join discount d on s.license_no=d.shop_license join product p on d.product_id=p.id";
+  const values = [license_No];
   try{
     const result=await db_query(query,values);
     console.log('Row deleted successfully:', result);
@@ -325,9 +337,13 @@ router.get('/',async(req,res)=>{
 
 //router.post('shop/show_products',async(req,res)=>{
 
+router.get('/productsundersubcategory',async(req,res)=>{
+
+});
 
 router.post('/productsundersubcategory',async(req,res)=>{
-      let {name}=req.body;
+      let {subcategoryName}=req.body;
+      let name=subcategoryName;
       console.log(name);
       name=name.replace("'", " ");
       console.log(name.toLowerCase());
@@ -353,7 +369,7 @@ router.post('/product_info',async(req,res)=>{
   }
 });
 
-router.post('/search_something',async(req,res)=>{
+router.post('/searchbar',async(req,res)=>{
   let {text}=req.body;
   console.log(text);
   text="%"+text.toUpperCase()+"%";
@@ -376,6 +392,62 @@ router.post('/search_something',async(req,res)=>{
 })
 
 
+router.post('/order',async(req,res)=>{
+  const {customer_phone,products}=req.body;
+  const params=[customer_phone];
+  //const query="Insert into cart_customer (customer_phone) values($1)";
+  try {
+    const query="Insert into cart_customer (customer_phone) values($1)";
+    const result = await db.query(query, params);
+    console.log('Row deleted successfully:', result);
+    let cart_id_query="select id from cart_customer where customer_phone=$1";
+    //console.log('Row deleted successfully:', result);
+    let cart_id=await db.query(cart_id_query,params);
+    console.log(cart_id);
+    //cart_id=new uuidParse(cart_id);
+    console.log(cart_id);
+    for(let product of products){
+      const values=[cart_id[0].id,product.product_id,product.license,1];
+      console.log(product.product_id);
+      const query="insert into cart_product (id,product_id,license,quantity) values($1,$2,$3,$4)";
+      const result=await db.query(query,values);
+      
+    }
+    res.status(200).send('Row deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting row:', error);
+    res.status(500).send('Error deleting row from the database.');
+  }
+});
+
+
+router.post('/make_review',async(req,res)=>{
+  const {customer_phone,shop_license,product_id,opinion,rating}=req.body;
+  const values=[customer_phone,shop_license,product_id,opinion,rating];
+  const query="insert into product_review (customer_phone,shop_license,product_id,opinion,rating) values($1,$2,$3,$4,$5)";
+  try {
+    const result = await db.query(query, values);
+    console.log('Row deleted successfully:', result);
+    res.status(200).send('Row deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting row:', error);
+    res.status(500).send('Error deleting row from the database.');
+  }
+});
+
+router.post('/show_reviews',async(req,res)=>{
+  const {product_id,shop_license}=req.body;
+  const values=[product_id,shop_license];
+  const query="select c.name,r.opinion,r.rating from product_review r join customer c on c.phone_number=r.customer_phone where product_id=$1 and shop_license=$2";
+  try {
+    const result = await db.query(query, values);
+    console.log('Row deleted successfully:', result);
+    res.status(200).send('Row deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting row:', error);
+    res.status(500).send('Error deleting row from the database.');
+  }
+});
 
 
 
