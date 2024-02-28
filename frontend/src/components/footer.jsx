@@ -7,7 +7,9 @@ const Footer = () => {
     <>
       <footer className="page-footer">
         <div className="top">
-          <div className="left">there's going to be a logo here</div>
+          <div className="left">
+            <img src="project_logo.png" alt="" />
+          </div>
           <div className="middle">
             <div className="about-us">
               <h2>About Us</h2>
@@ -35,14 +37,18 @@ const Footer = () => {
             </div>
           </div>
           <div className="right">
-            <h1>Subscribe</h1>
+            <h2>Subscribe</h2>
             <p>
               Join our community to receive updates on new products and
               promotions.
             </p>
             <div className="newsletter">
-              <input type="text" placeholder="Enter your email" />
-              <button>Subscribe</button>
+              <input
+                className="newsletter-email-address"
+                type="text"
+                placeholder="Enter your email"
+              />
+              <button className="newsletter-button">Subscribe</button>
             </div>
             <p>
               By subscribing, you agree to our Privacy Policy and consent to

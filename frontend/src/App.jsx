@@ -12,6 +12,8 @@ import ProductDisplay from "./components/productDisplay.jsx";
 import ShopLogin from "./components/shopLogin.jsx";
 import ShopProfile from "./components/shop_profile.jsx";
 
+import Cart from "./components/cart.jsx";
+
 const App = () => {
   return (
     <Router>
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/deleteProduct" element={<Delete />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/afterSignup" element={<AfterSignUp />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </DataProvider>
     </Router>

@@ -4,7 +4,8 @@ import { useData } from "./Datacontext.jsx";
 
 import "../styles/login.css";
 function login() {
-  const { customerData, setCustomerData } = useData();
+  const { customerData, setCustomerData, isLoggedIn, setIsLoggedIn } =
+    useData();
   const [formData, setFormData] = useState({
     phone_number: "",
     password: "",
@@ -44,14 +45,16 @@ function login() {
       });
       const customer_data = await response.json();
       console.log("Here");
+      console.log("phone number", customer_data[0].phone_number);
 
       if (response.status == 200) {
         // Redirect to a new page upon successful login
         console.log("login successful");
+        setIsLoggedIn(true);
 
         console.log("customer_data", customer_data);
         setCustomerData(customer_data);
-        navigate("/customerProfile");
+        navigate("/");
       } else {
         // Handle unsuccessful login (show error message, etc.)
         console.error("Login failed");

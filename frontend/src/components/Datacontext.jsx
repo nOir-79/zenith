@@ -11,6 +11,8 @@ export const DataProvider = ({ children }) => {
   const [showProduct, setShowProduct] = useState([]);
   const [customerData, setCustomerData] = useState([{}]);
   const [shopData, setShopData] = useState([{}]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartProducts, setCartProducts] = useState([]);
 
   return (
     <DataContext.Provider
@@ -31,6 +33,10 @@ export const DataProvider = ({ children }) => {
         setCustomerData,
         shopData,
         setShopData,
+        isLoggedIn,
+        setIsLoggedIn,
+        cartProducts,
+        setCartProducts,
       }}
     >
       {children}

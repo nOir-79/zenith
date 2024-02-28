@@ -7,12 +7,74 @@ import {
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdChevronRight, MdOutlineMail } from "react-icons/md";
 import "../styles/home_page.css";
+import DiscountedSlider from "./discounted_slider.jsx";
 import Footer from "./footer.jsx";
 import Header from "./header.jsx";
+import Slider from "./slider.jsx";
 function HomePage(user) {
   const isUserPage = user["user"];
-
-  const { category, setCategory } = useData();
+  const products = [
+    {
+      name: "Car",
+      description: "This is a car",
+      price: 10000,
+    },
+    {
+      name: "Bike",
+      description: "This is a bike",
+      price: 1000,
+    },
+    {
+      name: "Truck",
+      description: "This is a truck",
+      price: 100000,
+    },
+    {
+      name: "Scooter",
+      description: "This is a scooter",
+      price: 100,
+    },
+    {
+      name: "Ca",
+      description: "This is a car",
+      price: 10000,
+    },
+    {
+      name: "Bik",
+      description: "This is a bike",
+      price: 1000,
+    },
+    {
+      name: "Truc",
+      description: "This is a truck",
+      price: 100000,
+    },
+    {
+      name: "Scoot",
+      description: "This is a scooter",
+      price: 100,
+    },
+    {
+      name: "C",
+      description: "This is a car",
+      price: 10000,
+    },
+    {
+      name: "Bi",
+      description: "This is a bike",
+      price: 1000,
+    },
+    {
+      name: "Tru",
+      description: "This is a truck",
+      price: 100000,
+    },
+    {
+      name: "Sco",
+      description: "This is a scooter",
+      price: 100,
+    },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,8 +82,6 @@ function HomePage(user) {
         const response = await fetch("http://localhost:3000/");
         const data = await response.json();
         console.log("Data:", data);
-        setCategory(data);
-        console.log(category);
       } catch (error) {
         console.error("Error fetching categories: ", error);
       }
@@ -38,18 +98,20 @@ function HomePage(user) {
           <div className="featured-before-slide">
             <h1>Discover the Best Deals Online Today</h1>
             <div className="featured-before-slide-right">
-              <h1>
+              <p>
                 Find a wide range of featured Products and exclusive deals.Shop
                 now and save!
-              </h1>
+              </p>
               <div className="featured-shop-learn-more">
-                <button>Shop</button>
+                <button className="featured-shop">Shop</button>
                 <button>Learn More</button>
               </div>
             </div>
           </div>
 
-          <div className="featured-slider">This is going to be a slider</div>
+          <div className="featured-slider">
+            <Slider products={products} />
+          </div>
         </div>
         <div className="homepage-discounted-content">
           <div className="homepage-discounted-content-left">
@@ -60,7 +122,7 @@ function HomePage(user) {
               decor, or more, we have it all.
             </p>
             <div className="discounted-buttons">
-              <h2>Learn More</h2>
+              <h2 id="learn-more">Learn More</h2>
               <div className="discounted-signUp">
                 <h2>Sign Up</h2>
                 <MdChevronRight />
@@ -68,7 +130,7 @@ function HomePage(user) {
             </div>
           </div>
           <div className="homepage-discounted-content-right">
-            This is an image slider
+            <DiscountedSlider products={products} />
           </div>
         </div>
         <div className="homepage-shopSignup">
@@ -77,22 +139,26 @@ function HomePage(user) {
             Connect with millions of buyers and start selling your products.
           </p>
           <div className="homepage-shopSignup-buttons">
-            <h2>Sign Up</h2>
+            <h2 className="homepage-shopSignup-buttons-signUp">Sign Up</h2>
             <h2>Learn More</h2>
           </div>
         </div>
         <div className="platform-review">
-          <CiCircleChevLeft />
+          <CiCircleChevLeft className="platform-review-icons" />
           <div className="platform-review-review">
-            <h1>Companay Name</h1>
-            <p>Review</p>
+            <h1>Webflow</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+              in nam odio! Libero error itaque quasi quisquam, laboriosam
+              mollitia voluptates?
+            </p>
           </div>
-          <CiCircleChevRight />
+          <CiCircleChevRight className="platform-review-icons" />
         </div>
 
         <div className="frequently-asked">
           <h1>Frequently Asked Questions</h1>
-          <p>Find answers to common questions for both buyers and sellers.</p>
+          <h3>Find answers to common questions for both buyers and sellers.</h3>
           <div className="question-answer">
             <div>
               <h2>How to create an account?</h2>
@@ -177,44 +243,41 @@ function HomePage(user) {
           <div className="questionsLeft">
             <h1>Still have questions?</h1>
             <p>Contact our customer support for further assistance.</p>
-            <button>Contact</button>
+            <button className="questionsLeft-contact">Contact</button>
           </div>
         </div>
 
         <div className="home-getInTouch">
-          <div className="top">
-            <div className="left">
-              <h1>Get in Touch</h1>
-              <p>
-                We're here to help. Fill out the form below and we'll get back
-                to you as soon as possible.
-              </p>
+          <div className="left">
+            <h1>Get in Touch</h1>
+            <p>
+              We're here to help. Fill out the form below and we'll get back to
+              you as soon as possible.
+            </p>
+          </div>
+          <div className="right">
+            <div>
+              <MdOutlineMail className="GetInTouch-icons" />
+              <div className="inner-div">
+                <h2>Email</h2>
+                <a href="#">shakshor123@gmail.com</a>
+              </div>
             </div>
-            <div className="right">
-              <div>
-                <MdOutlineMail />
-                <div className="inner-div">
-                  <h2>Email</h2>
-                  <a href="#">shakshor123@gmail.com</a>
-                </div>
+            <div>
+              <FaPhoneAlt className="GetInTouch-icons" />
+              <div className="inner-div">
+                <h2>Phone</h2>
+                <a href="#">+123 456 7890</a>
               </div>
-              <div>
-                <FaPhoneAlt />
-                <div className="inner-div">
-                  <h2>Phone</h2>
-                  <a href="#">+123 456 7890</a>
-                </div>
-              </div>
-              <div>
-                <CiLocationOn />
-                <div className="inner-div">
-                  <h2>Office</h2>
-                  <p>123 Main Street, New York, NY 10001</p>
-                </div>
+            </div>
+            <div>
+              <CiLocationOn className="GetInTouch-icons" />
+              <div className="inner-div">
+                <h2>Office</h2>
+                <p>123 Main Street, New York, NY 10001</p>
               </div>
             </div>
           </div>
-          <div className="bottom">There's Going to be an image here</div>
         </div>
         <Footer />
       </div>

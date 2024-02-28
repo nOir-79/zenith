@@ -12,13 +12,36 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 120px 80px 120px 80px;
+  padding: 60px 80px 60px 80px;
   justify-content: center;
 }
-
+.featured-before-slide-right p {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 20px 0px 20px 0px;
+}
+.featured-shop-learn-more button {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin-right: 20px;
+  border: 1px solid black;
+  font-family: monospace;
+}
+.featured-shop-learn-more .featured-shop {
+  background-color: black;
+  color: white;
+}
+.featured-shop-learn-more .featured-shop:hover {
+  background-color: white;
+  color: black;
+}
 .featured-before-slide {
   display: flex;
   justify-content: space-between;
+}
+.featured-before-slide h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 .featured-before-slide-right {
   display: flex;
@@ -27,74 +50,239 @@
 
 .homepage-discounted-content {
   display: flex;
-  padding: 0 80px 0 80px;
+  margin: 0px 80px 80px 80px;
+  background-color: #f7eee3;
+  box-sizing: border-box;
+  padding: 0px 0px 0px 20px;
+  border-radius: 10px;
+}
+.homepage-discounted-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 .homepage-discounted-content-left {
+  width: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+.homepage-discounted-content-left p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  padding: 20px 0px 20px 0px;
+}
+.homepage-discounted-content-right {
+  width: 50%;
 }
 
 .homepage-discounted-content-left .discounted-buttons {
   display: flex;
+  margin-bottom: 10px;
+}
+.homepage-discounted-content-left .discounted-buttons #learn-more {
+  border: 1px solid black;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+}
+.homepage-discounted-content-left .discounted-buttons #learn-more:hover {
+  background-color: black;
+  color: white;
 }
 .discounted-signUp {
   display: flex;
+  margin-left: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  font-family: monospace;
 }
 
 .homepage-shopSignup {
   display: flex;
   flex-direction: column;
-  padding: 0 80px 0 80px;
-}
+  margin: 0px 80px 0px 80px;
 
+  padding: 30px 0px 80px 0px;
+}
+.homepage-shopSignup h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.homepage-shopSignup p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  padding: 20px 0px 20px 0px;
+}
 .homepage-shopSignup .homepage-shopSignup-buttons {
   display: flex;
+}
+.homepage-shopSignup-buttons h2 {
+  padding: 0.5rem;
+  border: 1px solid black;
+  margin-right: 10px;
+  font-family: monospace;
+}
+.homepage-shopSignup-buttons-signUp {
+  background-color: black;
+  color: white;
+}
+
+.homepage-shopSignup-buttons-signUp:hover {
+  background-color: white;
+  color: black;
 }
 
 .platform-review {
   display: flex;
-  padding: 0 80px 0 80px;
+  padding: 30px 80px 30px 80px;
+  margin: 0px 80px 0px 80px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #514f4d;
+  border-radius: 10px;
+  font-family: monospace;
 }
 
 .platform-review-review {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+}
+.platform-review-review h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.platform-review-review p {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 20px 0px 20px 0px;
+  text-align: center;
+  line-height: 1.8rem;
+}
+.platform-review-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  height: 30px;
+  color: rgb(186, 177, 177);
 }
 
 .frequently-asked {
   display: flex;
   flex-direction: column;
   padding: 0 80px 0 80px;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+}
+.frequently-asked h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.frequently-asked h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .question-answer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
+  padding: 60px 0px 40px 0px;
+}
+.question-answer div {
+  border-top: 1px solid black;
+  padding: 20px 0px 20px 0px;
+  margin-right: 3rem;
 }
 
 .home-getInTouch {
   display: flex;
-  flex-direction: column;
-  padding: 0 80px 0 80px;
-}
-
-.home-getInTouch .top {
-  display: flex;
+  margin: 0 80px 0 80px;
   justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px 100px 0px;
 }
-
-.home-getInTouch .top .left {
+.home-getInTouch .left {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+.home-getInTouch .left h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
-.home-getInTouch .top .right {
-  display: flex;
-  flex-direction: column;
+.home-getInTouch .left p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 20px 0px 20px 0px;
+  font-family: monospace;
 }
 
-.home-getInTouch .top .right .inner-div {
+.home-getInTouch .right {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+
+.home-getInTouch .right div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.home-getInTouch .right div svg {
+  padding: 0px 10px 0px 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.home-getInTouch .right .inner-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  font-family: monospace;
+}
+.home-getInTouch .right div {
+  display: flex;
+}
+.questionsLeft {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questionsLeft p {
+  padding: 10px 0px 20px 0px;
+}
+.questionsLeft-contact {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+}
+.questionsLeft-contact:hover {
+  background-color: black;
+  color: white;
 }
