@@ -1,4 +1,4 @@
-.login-body {
+.customer-login {
   margin: 0;
   padding: 0;
   display: flex;
@@ -7,36 +7,36 @@
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  /* background: rgba(244, 238, 229, 1); */
+  background: #e9e9eb;
 }
 
-.back-button {
+.customer-login .back-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background-color: #8c666d;
+  margin-left: 0.5rem;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
-  color: #fff;
-  background-color: linear-gradient(
-    to bottom,
-    #0f0c29,
-    #302b63,
-    #24243e
-  ); /* Stylish blue color */
-  border: 2px solid #3498db;
+  color: #ebebf1;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   align-self: flex-start;
   margin-top: -100px;
+  border: 1px solid #8c666d;
 }
 
-.back-button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+.customer-login .back-button:hover {
+  background-color: #ebebf1;
+  color: #8c666d; /* Darker blue on hover */
 }
-.shopLogin {
+.customer-login .shopLogin {
+  width: 350px;
+  background-color: #8c666d;
   display: inline-block;
   padding: 10px 20px;
   font-size: 16px;
@@ -44,43 +44,45 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid #3498db;
-  border-radius: 5px;
-  color: #fff;
-  background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  border-radius: 10px 10px 10px 10px;
+  color: #ebebf1;
+  border-top: 2px solid #8c666d;
+  border-left: 2px solid #8c666d;
+  border-right: 2px solid #8c666d;
   transition: background-color 0.3s, color 0.3s;
 }
 
-.shopLogin:hover {
-  background-color: #2980b9;
-  border-color: #2980b9;
+.customer-login .shopLogin:hover {
+  background-color: #e9e9eb;
+
+  color: #8c666d;
 }
 
-.shopLogin:active {
+.customer-login .shopLogin:active {
   background-color: #1f618d;
   border-color: #1f618d;
 }
 
-.main {
+.customer-login .main {
   width: 350px;
   height: 500px;
-  background: red;
+  background: #e9e9eb;
   overflow: hidden;
-  background: url("image.jpg") no-repeat center / cover;
-  border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
+  border: 2px solid #8c666d;
+  border-radius: 10px 10px 10px 10px;
+  /* box-shadow: 5px 20px 50px #000; */
 }
-#chk {
+.customer-login #chk {
   display: none;
 }
-.signup {
+.customer-login .signup {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-label {
-  color: #fff;
+.customer-login label {
+  color: #8c666d;
   font-size: 2.3em;
   justify-content: center;
   display: flex;
@@ -90,10 +92,10 @@ label {
   transition: 0.5s ease-in-out;
 }
 
-.input {
+.customer-login .input {
   width: 60%;
-  height: 30px;
-  background: #e0dede;
+  height: 40px;
+  background: white;
   justify-content: center;
   display: flex;
   margin: 20px;
@@ -102,16 +104,17 @@ label {
   border: none;
   outline: none;
   border-radius: 5px;
+  color: #8c666d;
 }
 
-.button {
+.customer-login .button {
   width: 60%;
   height: 40px;
   margin: 10px auto;
   justify-content: center;
   display: block;
-  color: #fff;
-  background: #573b8a;
+  color: white;
+  background: #8c666d;
   font-size: 1em;
   font-weight: bold;
   margin-top: 20px;
@@ -121,33 +124,83 @@ label {
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
-.lgbtn {
+.customer-login .lgbtn {
   color: #535050;
+  background: white;
 }
 
-.button:hover {
-  background: #6d44b8;
+.customer-login .button:hover {
+  background-color: white;
+  color: #786575;
+}
+#customer-login {
+  border: 1px solid #8c666d;
+}
+#customer-login:hover {
+  background-color: #8c666d;
+  color: #e9e9eb;
+  border: 1px solid #e9e9eb;
 }
 
-.login {
+.customer-login .login {
   height: 460px;
-  background: #eee;
+  background: #8c666d;
   border-radius: 60% / 10%;
   transform: translateY(-180px);
   transition: 0.8s ease-in-out;
 }
-.login label {
-  color: #573b8a;
+.customer-login .login label {
+  color: white;
   transform: scale(0.6);
 }
 
-#chk:checked ~ .login {
+.customer-login #chk:checked ~ .login {
   transform: translateY(-500px);
 }
 
-#chk:checked ~ .login label {
+.customer-login #chk:checked ~ .login label {
   transform: scale(1);
 }
-#chk:checked ~ .signup label {
+.customer-login #chk:checked ~ .signup label {
   transform: scale(0.6);
+}
+
+.shop-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+}
+.shop-signup p {
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+#start-here-shop {
+  color: #8c666d;
+}
+#start-here-shop:hover {
+  color: #62464b;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.user-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+}
+.user-signup p {
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+#start-here-user {
+  color: #e9e9eb;
+}
+#start-here-user:hover {
+  color: #cfcfd3;
+  cursor: pointer;
+  text-decoration: underline;
 }

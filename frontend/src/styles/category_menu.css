@@ -1,0 +1,32 @@
+.category-menu {
+  position: relative;
+}
+
+.category-button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+
+.category-item {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.subcategories {
+}
+
+.subcategory-item {
+  padding: 5px 0;
+  cursor: pointer;
+}

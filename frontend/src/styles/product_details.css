@@ -1,0 +1,231 @@
+.top-product {
+  display: flex;
+  background-color: rgba(244, 238, 229, 0.3);
+}
+.top-left-product {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.top-middle-product {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 50px 20px 0px;
+  align-items: center;
+  /* margin: 8rem 0 2rem 0; */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-right: 1px solid rgb(196, 190, 190);
+}
+.top-middle-product img {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px 10px 10px 10px;
+}
+.top-right-product {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-name-top {
+  padding: 0.5rem 1.25rem 0.5rem 1.25rem;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  min-height: 150px;
+  background-color: rgba(94, 153, 194, 1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  letter-spacing: 1.75px;
+}
+.top-right-product-inner {
+  width: 250px;
+  background-color: #2222220d;
+  margin-top: 5rem;
+  letter-spacing: 2px;
+}
+.product-name-top h1 {
+  text-align: center;
+}
+.top-right-product-reviews {
+  border-bottom: 2px dotted black;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 12px;
+}
+.top-right-product-reviews .second {
+  text-align: center;
+  font-size: 20px;
+}
+.top-right-product-price {
+  border-bottom: 2px dotted black;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 12px;
+}
+.top-right-product-price .second {
+  text-align: center;
+  font-size: 20px;
+}
+
+.top-right-product-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  font-size: 12px;
+}
+
+.product-quantity-counter {
+  display: flex;
+  align-items: center;
+}
+.product-quantity-counter .second {
+  padding: 0.4rem 0.75rem 0.4rem 0.75rem;
+  background-color: white;
+  margin: 0 1rem 0 1rem;
+  color: black;
+  font-size: 1rem;
+}
+.product-quantity-counter .icons {
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.top-right-product-inner .add-to-cart-product {
+  text-align: center;
+  padding: 0.5rem 0rem 0.5rem 0rem;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+
+.top-right-product-inner .add-to-cart-product:hover {
+  background-color: white;
+  color: black;
+}
+.bottom-product {
+  background-color: rgba(244, 238, 229, 0.3);
+}
+.product-reviews {
+  /* background-color: #2222220d; */
+  padding-bottom: 2rem;
+}
+.product-reviews-list {
+  padding: 3rem 2rem 3rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 2rem;
+  margin: 0px 40px 40px 40px;
+  background-color: #2321210d;
+  border-radius: 10px;
+}
+.actual-reviews {
+  padding: 1rem 0 1rem 0;
+  width: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px dotted black;
+}
+.actual-reviews:hover {
+  background-color: #ddd0d00d;
+  box-shadow: 5px 5px 30px 0px rgb(171, 171, 169);
+}
+.product-reviews h2 {
+  letter-spacing: 1.5px;
+  font-size: 1.5rem;
+  padding: 2rem 0 2rem 4rem;
+}
+
+.product-review-report {
+  display: flex;
+  align-items: center;
+}
+.reviewer-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.product-review-report .icons {
+  margin: 5px;
+}
+.product-review-report .icons:hover {
+  color: black;
+  cursor: pointer;
+}
+.add-review h1 {
+  padding: 2rem 4rem 2.5rem 4rem;
+  letter-spacing: 1.5px;
+  font-size: 1.5rem;
+}
+.add-review-form {
+  display: flex;
+  margin: 0px 40px 40px 40px;
+  flex-direction: column;
+  padding: 2.5rem 4rem 2.5rem 4rem;
+  background-color: #2222220d;
+  border-radius: 10px;
+}
+.add-rating {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0rem 1.5rem 0rem;
+}
+.add-opinion {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0rem 1.5rem 0rem;
+}
+.add-review-label {
+  all: initial;
+  color: black;
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+}
+.add-review-rating {
+  all: initial;
+  color: black;
+  height: 20px;
+  margin-left: 1rem;
+  letter-spacing: 1px;
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+}
+.add-review-opinion {
+  all: initial;
+  color: black;
+  height: 2rem;
+  letter-spacing: 1px;
+  background-color: white;
+  border: 1px solid black;
+  margin-left: 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.submit-review-form {
+  all: initial;
+  border: 1px solid rgb(0, 0, 0);
+  width: 4rem;
+  text-align: center;
+  padding: 5px 0px 5px 0px;
+  letter-spacing: 1px;
+}
+
+.submit-review-form:hover {
+  color: white;
+  background: black;
+}

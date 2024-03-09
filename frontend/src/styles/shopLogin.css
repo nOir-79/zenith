@@ -1,4 +1,4 @@
-.shop-body {
+.shop-form {
   margin: 0;
   padding: 0;
   display: flex;
@@ -6,29 +6,27 @@
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  background: #e9e9eb;
 }
-
-.main {
+.shop-form .main {
   width: 350px;
   height: 500px;
-  background: red;
+  background: #8c666d;
   overflow: hidden;
-  background: url("image.jpg") no-repeat center / cover;
   border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
+  border: 2px solid #877283;
 }
-#chk {
+.shop-form #chk {
   display: none;
 }
-.shop-signup {
+.shop-form .shop-signup {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-label {
-  color: #fff;
+.shop-form label {
+  color: #e9e9eb;
   font-size: 2.3em;
   justify-content: center;
   display: flex;
@@ -38,10 +36,10 @@ label {
   transition: 0.5s ease-in-out;
 }
 
-.input {
+.shop-form .input {
   width: 60%;
   height: 30px;
-  background: #e0dede;
+  background: #e9e9eb;
   justify-content: center;
   display: flex;
   margin: 20px;
@@ -52,14 +50,14 @@ label {
   border-radius: 5px;
 }
 
-.button {
+.shop-form .button {
   width: 60%;
   height: 40px;
   margin: 10px auto;
   justify-content: center;
   display: block;
-  color: #fff;
-  background: #573b8a;
+  color: #8c666d;
+  background: #e9e9eb;
   font-size: 1em;
   font-weight: bold;
   margin-top: 20px;
@@ -68,31 +66,46 @@ label {
   border-radius: 5px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+  border: 1px solid #8c666d;
 }
 
-.button:hover {
-  background: #6d44b8;
+.shop-form .button:hover {
+  background: #8c666d;
+  color: #e9e9eb;
+  border: 1px solid #e9e9eb;
 }
 
-.shop-login {
+.shop-form .shop-login {
   height: 460px;
-  background: #eee;
+  background: #e9e9eb;
   border-radius: 60% / 10%;
   transform: translateY(-180px);
   transition: 0.8s ease-in-out;
 }
-.ahop-login label {
-  color: #573b8a;
+.shop-form .shop-login label {
+  color: #8c666d;
   transform: scale(0.6);
 }
 
-#chk:checked ~ .shop-login {
+.shop-form .shop-login .input {
+  border: 1px solid #8c666d;
+}
+#shop-login-button {
+  background-color: #8c666d;
+  color: #e9e9eb;
+}
+#shop-login-button:hover {
+  background-color: #e9e9eb;
+  color: #8c666d;
+  border: 1px solid #8c666d;
+}
+.shop-form #chk:checked ~ .shop-login {
   transform: translateY(-500px);
 }
 
-#chk:checked ~ .shop-login label {
+.shop-form #chk:checked ~ .shop-login label {
   transform: scale(1);
 }
-#chk:checked ~ .shop-signup label {
+.shop-form #chk:checked ~ .shop-signup label {
   transform: scale(0.6);
 }

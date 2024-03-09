@@ -1,0 +1,9 @@
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.index-row {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px 5px 0px;
+}

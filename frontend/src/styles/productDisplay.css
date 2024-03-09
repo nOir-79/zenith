@@ -1,10 +1,33 @@
+.product-display-outer {
+  background-color: #f4eee5;
+}
 .product-display {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 10px 20px 40px 10px;
+
   align-items: center;
   justify-content: center;
+}
+.product-display-top {
+  padding: 0 7rem 0 7rem;
+}
+.filter-search-result {
+  display: inline-block;
+  width: 6rem;
+  display: flex;
+  padding: 4px 8px 4px 8px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+.back-button-2 {
+  background-color: rgb(151, 148, 148);
+  color: rgb(48, 47, 47);
+}
+.back-button-2:hover {
+  background-color: rgb(48, 47, 47);
+  color: #f4eee5;
 }
 
 /* Add any additional styling for the product display page as needed */

@@ -7,11 +7,13 @@ import {
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdChevronRight, MdOutlineMail } from "react-icons/md";
 import "../styles/home_page.css";
+import { useData } from "./Datacontext";
 import DiscountedSlider from "./discounted_slider.jsx";
 import Footer from "./footer.jsx";
 import Header from "./header.jsx";
 import Slider from "./slider.jsx";
 function HomePage(user) {
+  const { categoryData, setCategoryData } = useData();
   const isUserPage = user["user"];
   const products = [
     {
@@ -82,6 +84,7 @@ function HomePage(user) {
         const response = await fetch("http://localhost:3000/");
         const data = await response.json();
         console.log("Data:", data);
+        setCategoryData(data);
       } catch (error) {
         console.error("Error fetching categories: ", error);
       }
@@ -113,47 +116,53 @@ function HomePage(user) {
             <Slider products={products} />
           </div>
         </div>
-        <div className="homepage-discounted-content">
-          <div className="homepage-discounted-content-left">
-            <h1>Find Your Perfect Products Online</h1>
-            <p>
-              Explore our curated collection of featured products from various
-              categories. Whether you're looking for electronics, fashion, home
-              decor, or more, we have it all.
-            </p>
-            <div className="discounted-buttons">
-              <h2 id="learn-more">Learn More</h2>
-              <div className="discounted-signUp">
-                <h2>Sign Up</h2>
-                <MdChevronRight />
+        <div className="homepage-discounted-content-before">
+          <div className="homepage-discounted-content">
+            <div className="homepage-discounted-content-left">
+              <h1>Find Your Perfect Products Online</h1>
+              <p>
+                Explore our curated collection of featured products from various
+                categories. Whether you're looking for electronics, fashion,
+                home decor, or more, we have it all.
+              </p>
+              <div className="discounted-buttons">
+                <h2 id="learn-more">Learn More</h2>
+                <div className="discounted-signUp">
+                  <h2>Sign Up</h2>
+                  <MdChevronRight />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="homepage-discounted-content-right">
-            <DiscountedSlider products={products} />
-          </div>
-        </div>
-        <div className="homepage-shopSignup">
-          <h1>Join our online marketplace today!</h1>
-          <p>
-            Connect with millions of buyers and start selling your products.
-          </p>
-          <div className="homepage-shopSignup-buttons">
-            <h2 className="homepage-shopSignup-buttons-signUp">Sign Up</h2>
-            <h2>Learn More</h2>
+            <div className="homepage-discounted-content-right">
+              <DiscountedSlider products={products} />
+            </div>
           </div>
         </div>
-        <div className="platform-review">
-          <CiCircleChevLeft className="platform-review-icons" />
-          <div className="platform-review-review">
-            <h1>Webflow</h1>
+        <div className="homepage-shopSignup-before">
+          <div className="homepage-shopSignup">
+            <h1>Join our online marketplace today!</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-              in nam odio! Libero error itaque quasi quisquam, laboriosam
-              mollitia voluptates?
+              Connect with millions of buyers and start selling your products.
             </p>
+            <div className="homepage-shopSignup-buttons">
+              <h2 className="homepage-shopSignup-buttons-signUp">Sign Up</h2>
+              <h2>Learn More</h2>
+            </div>
           </div>
-          <CiCircleChevRight className="platform-review-icons" />
+        </div>
+        <div className="platform-review-before">
+          <div className="platform-review">
+            <CiCircleChevLeft className="platform-review-icons" />
+            <div className="platform-review-review">
+              <h1>Webflow</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+                in nam odio! Libero error itaque quasi quisquam, laboriosam
+                mollitia voluptates?
+              </p>
+            </div>
+            <CiCircleChevRight className="platform-review-icons" />
+          </div>
         </div>
 
         <div className="frequently-asked">

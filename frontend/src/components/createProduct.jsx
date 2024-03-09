@@ -41,6 +41,7 @@ const ProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Data:", formData);
 
     // Simulate a POST request to send form data to the server
     // Replace the URL with your actual API endpoint

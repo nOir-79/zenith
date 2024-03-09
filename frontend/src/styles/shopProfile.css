@@ -1,8 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 .shop-profile-body {
   margin: 0;
   box-sizing: border-box;
   padding: 0;
-  background: linear-gradient(135deg);
+  background: #e9e9eb;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: 0.8px;
+  line-height: 1.4;
 }
 
 .product-information-under-image {
@@ -68,10 +77,12 @@
   text-align: center;
   border-radius: 10px;
   color: rgb(222, 215, 215);
+  border: 1px solid #8c666d;
 }
 .left-sidebar-item:hover {
-  background: #c0cfb0;
-  color: white;
+  background: rgb(222, 215, 215);
+  color: #8c666d;
+  border: 1px solid #8c666d;
 }
 
 .shop-product-card {
@@ -102,22 +113,33 @@
 }
 
 .product-information-under-image {
-  background-color: #c0cfb0;
+  /* background-color: #c0cfb0; */
   /* #b9d29d; */
+  /* background-color: #877283; */
+  border: 2px solid #877283;
   padding: 5px;
-  color: white;
+  color: #6e6f72;
   border-radius: 5px;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: 1px;
+  line-height: 1.4;
 }
 
 .shop-product-name {
   font-size: 1rem;
-  font-weight: 700;
-  color: #6e6f72;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 .shop-product-price {
-  color: #666;
+  /* color: #666; */
   font-size: 1rem;
 }
 
@@ -139,14 +161,15 @@
 }
 .left-top-shop {
   padding: 5px 10px 5px 10px;
-  background-color: #b9d29d;
+  background-color: #8c666d;
   border-radius: 10px;
-  color: rgb(64, 62, 62);
+  color: rgb(222, 215, 215);
+  border: 1px solid #8c666d;
 }
 
 .left-top-shop:hover {
-  background-color: #72a276;
-  color: black;
+  background-color: rgb(222, 215, 215);
+  color: #8c666d;
 }
 
 /* Hover effect */
@@ -167,16 +190,18 @@
 }
 
 .shop-product-heading {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #6e716a;
+  border: 2px solid #877283;
   padding: 0;
   margin: 0;
   font-family: Georgia, "Times New Roman", Times, serif;
-  background-color: #b2bb98;
+  color: #8c666d;
   padding: 10px 10px 10px 10px;
   margin-bottom: 20px;
   border-radius: 10px;
+  letter-spacing: 1px;
+  line-height: 1.6;
 }
 
 .hover-dots {
@@ -199,4 +224,17 @@
   border-radius: 0;
   background: white;
   color: #b9d29d;
+}
+
+.shop-name {
+  text-decoration: none;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }

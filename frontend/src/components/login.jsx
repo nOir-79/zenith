@@ -1,23 +1,32 @@
+import { message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "./Datacontext.jsx";
 
 import "../styles/login.css";
 function login() {
-  const { customerData, setCustomerData, isLoggedIn, setIsLoggedIn } =
-    useData();
+  const {
+    customerData,
+    setCustomerData,
+    isLoggedIn,
+    setIsLoggedIn,
+    shopData,
+    setShopData,
+    isShopLoggedIn,
+    setIsShopLoggedIn,
+  } = useData();
   const [formData, setFormData] = useState({
     phone_number: "",
     password: "",
   });
-  const [signupData, setSignupData] = useState({
-    name: "",
-    phone_number: "",
+  const [loginClicked, setLoginClicked] = useState(false);
+  const [shopLogin, setShopLogin] = useState({
+    license_no: "",
     password: "",
   });
-  const handleChangeSignUp = (e) => {
+  const handleChangeShopLogin = (e) => {
     const { id, value } = e.target;
-    setSignupData((prevData) => ({
+    setShopLogin((prevData) => ({
       ...prevData,
       [id]: value,
     }));
@@ -29,6 +38,10 @@ function login() {
       ...prevData,
       [id]: value,
     }));
+  };
+
+  const handleShopSignup = () => {
+    navigate("/shopSignup");
   };
 
   const handleLogin = async (e) => {
@@ -51,6 +64,7 @@ function login() {
         // Redirect to a new page upon successful login
         console.log("login successful");
         setIsLoggedIn(true);
+        message.success("Login successful");
 
         console.log("customer_data", customer_data);
         setCustomerData(customer_data);
@@ -58,32 +72,71 @@ function login() {
       } else {
         // Handle unsuccessful login (show error message, etc.)
         console.error("Login failed");
+        message.error("Login failed");
       }
     } catch (error) {
       console.error("Error during login:", error);
+      message.error("Login failed");
     }
   };
   const handleSignup = async (e) => {
+    // e.preventDefault();
+    // console.log("here");
+    // try {
+    //   const response = await fetch("http://localhost:3000/customerSignUp", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(signupData),
+    //   });
+    //   const data = await response.json();
+    //   console.log(data);
+    //   if (response.status == 200) {
+    //     navigate("/afterSignup");
+    //   } else {
+    //     console.error("Signup failed");
+    //   }
+    // } catch (error) {
+    //   console.error("Error during signup:", error);
+    // }
+
     e.preventDefault();
     console.log("here");
+
     try {
-      const response = await fetch("http://localhost:3000/customerSignUp", {
+      const response = await fetch("http://localhost:3000/shopLogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(signupData),
+        body: JSON.stringify(shopLogin),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("data", data[0]);
+      // console.log(data);
       if (response.status == 200) {
-        navigate("/afterSignup");
+        console.log("login successful");
+        message.success("Login successful");
+        // Redirect to a new page upon successful login
+        setShopData(data[0]);
+        setIsShopLoggedIn(true);
+        navigate("/shopProfile");
       } else {
-        console.error("Signup failed");
+        // Handle unsuccessful login (show error message, etc.)
+        console.error("Login failed");
+        message.error("Login failed");
       }
     } catch (error) {
-      console.error("Error during signup:", error);
+      console.error("Error during login:");
+      message.error("Login failed");
     }
+  };
+  const handleUserSignup = () => {
+    navigate("/userSignup");
+  };
+  const handleUserLoginClicked = () => {
+    setLoginClicked(!loginClicked);
   };
   const handleShopLogin = () => {
     navigate("/shopLogin");
@@ -93,14 +146,18 @@ function login() {
   };
 
   return (
-    <div className="login-body">
+    <div className="customer-login">
       <button onClick={handleBackButton} className="back-button">
         Back
       </button>
+      {/* {!loginClicked && <button className="shopLogin">LOGIN AS AHOP</button>}
+
+      {loginClicked && <button className="shopLogin">login</button>} */}
+
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
-          <form className="signup-form" onSubmit={handleSignup}>
+          {/* <form className="signup-form" onSubmit={handleSignup}>
             <label htmlFor="chk" aria-hidden="true">
               Sign up
             </label>
@@ -137,12 +194,46 @@ function login() {
             <button className="button" type="submit">
               Sign up
             </button>
+          </form> */}
+          <form className="signup-form" onSubmit={handleSignup}>
+            <label htmlFor="chk" aria-hidden="true">
+              SHOP LOGIN
+            </label>
+            <input
+              className="input"
+              type="text"
+              name="license_no"
+              placeholder="License No"
+              id="license_no"
+              value={shopLogin.license_no}
+              required=""
+              onChange={handleChangeShopLogin}
+            />
+            <input
+              className="input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              id="password"
+              value={shopLogin.password}
+              required=""
+              onChange={handleChangeShopLogin}
+            />
+            <button className="button" type="submit">
+              LOGIN
+            </button>
+            <div className="shop-signup">
+              <p>Don't have an account yet?</p>
+              <p id="start-here-shop" onClick={handleShopSignup}>
+                Create Account
+              </p>
+            </div>
           </form>
         </div>
         <div className="login">
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} onClick={handleUserLoginClicked}>
             <label htmlFor="chk" aria-hidden="true">
-              Login
+              USER LOGIN
             </label>
             <input
               className="input"
@@ -162,15 +253,18 @@ function login() {
               value={formData.password}
               onChange={handleChange}
             />
-            <button className="button lgbtn" type="submit">
+            <button className="button lgbtn" id="customer-login" type="submit">
               Login
             </button>
+            <div className="user-signup">
+              <p>Don't have an account yet?</p>
+              <p onClick={handleUserSignup} id="start-here-user">
+                Create Account
+              </p>
+            </div>
           </form>
         </div>
       </div>
-      <button onClick={handleShopLogin} className="shopLogin">
-        login as shop
-      </button>
     </div>
   );
 }

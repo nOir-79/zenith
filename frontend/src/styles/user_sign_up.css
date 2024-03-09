@@ -1,0 +1,20 @@
+.user-form-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.user-form-signup form {
+  width: 50%;
+  padding: 3rem;
+}
+
+.user-form-signup .custom-button-1 {
+  background-color: #9391aa;
+}
+
+.user-form-signup .custom-button-1:hover {
+  background-color: #6e6c86;
+}

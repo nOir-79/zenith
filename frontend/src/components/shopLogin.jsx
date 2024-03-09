@@ -4,7 +4,8 @@ import { useData } from "./Datacontext.jsx";
 
 import "../styles/shopLogin.css";
 function login() {
-  const { shopData, setShopData } = useData();
+  const { shopData, setShopData, isShopLoggedIn, setIsShopLoggedIn } =
+    useData();
   const [formData, setFormData] = useState({ license_no: "", password: "" });
   const [signupData, setSignupData] = useState({
     name: "",
@@ -38,7 +39,6 @@ function login() {
         },
         body: JSON.stringify(signupData),
       });
-      const response_json = await response.json();
       console.log("response", response_json);
       data = response_json[0];
       if (response.status == 200) {
@@ -52,7 +52,9 @@ function login() {
       console.error("Error during signup:", error);
     }
   };
-
+  const handleBackButton = () => {
+    navigate("/");
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("here");
@@ -72,6 +74,7 @@ function login() {
         console.log("login successful");
         // Redirect to a new page upon successful login
         setShopData(data[0]);
+        setIsShopLoggedIn(true);
         navigate("/shopProfile");
       } else {
         // Handle unsuccessful login (show error message, etc.)
@@ -83,7 +86,7 @@ function login() {
   };
 
   return (
-    <div className="shop-body">
+    <div className="shop-form">
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="shop-signup">
@@ -159,7 +162,7 @@ function login() {
               value={formData.password}
               onChange={handleChange}
             />
-            <button className="button" type="submit">
+            <button className="button" id="shop-login-button" type="submit">
               Login
             </button>
           </form>

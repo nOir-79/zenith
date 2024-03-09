@@ -22,9 +22,11 @@ const Slider = ({ products }) => {
   return (
     <div className="product-slider">
       <div className="product">
-        <div className="prev" onClick={prevSlide}>
-          <GrFormPrevious />
-        </div>
+        <button className="prev-featured-product">
+          <div className="prev" onClick={prevSlide}>
+            <GrFormPrevious />
+          </div>
+        </button>
         {products.slice(index, index + 3).map((product, index) => {
           return (
             <div className="product" key={index}>
@@ -37,9 +39,11 @@ const Slider = ({ products }) => {
             </div>
           );
         })}
-        <div className="next" onClick={nextSlide}>
-          <MdOutlineNavigateNext />
-        </div>
+        <button className="next-featured-product">
+          <div className="next" onClick={nextSlide}>
+            <MdOutlineNavigateNext />
+          </div>
+        </button>
       </div>
     </div>
   );

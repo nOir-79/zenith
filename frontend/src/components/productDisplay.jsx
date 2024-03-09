@@ -1,7 +1,10 @@
 import React from "react";
+import { CiFilter } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import "../styles/productDisplay.css";
 import { useData } from "./Datacontext.jsx";
+import Footer from "./footer.jsx";
+import Header from "./header.jsx";
 import ProductCard from "./productCard";
 const ProductDisplay = () => {
   let products;
@@ -11,32 +14,48 @@ const ProductDisplay = () => {
     setShowProduct,
     subcategoryClicked,
     setClickedSubcategory,
-    productsundersubcategory,
-    setProductsundersubcategory,
+    subProducts,
+    setsubProducts,
+    searchText,
+    setSearchText,
   } = useData();
+  console.log("inside product display component", subProducts);
   if (subcategoryClicked) {
-    products = productsundersubcategory;
+    products = subProducts;
   } else {
     products = showProduct;
   }
+  console.log("products", products);
   const handleBackButtonClick = () => {
     setShowProduct([]);
     setClickedSubcategory("");
-    setProductsundersubcategory([]);
+    // setProductsundersubcategory([]);
     navigate("/");
   };
   console.log(products);
   return (
-    <div className="product-display">
-      <button
-        onClick={handleBackButtonClick}
-        className="absolute top-0 left-0 m-4 p-2 bg-blue-500 text-white rounded"
-      >
-        Back
-      </button>
-      {products.map((product, index) => (
-        <ProductCard key={index} product={product} />
-      ))}
+    <div className="product-display-outer">
+      <Header />
+      <div className="product-display-top">
+        <button
+          onClick={handleBackButtonClick}
+          className="back-button-2 rounded"
+        >
+          Back
+        </button>
+        <h1>SEARCH RESULTS FOR "{searchText}"</h1>
+        <div className="filter-search-result">
+          <CiFilter />
+          <p>FILTER</p>
+        </div>
+      </div>
+
+      <div className="product-display">
+        {products.map((product, index) => (
+          <ProductCard key={index} product={product} />
+        ))}
+      </div>
+      <Footer />
     </div>
   );
 };
